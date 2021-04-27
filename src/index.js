@@ -9,7 +9,11 @@ import "./index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import App from "./App";
 
-const rootReducer = combineReducers({});
+import authReducer from "./store/reducers/auth";
+
+const rootReducer = combineReducers({
+    auth: authReducer,
+});
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
