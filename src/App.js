@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import * as actions from "./store/actions";
 import { LOGGED_IN_ROUTES, LOGGED_OUT_ROUTES } from "./routing/routes";
+import Navbar from "./components/Navbar";
 
 const App = () => {
     const dispatch = useDispatch();
@@ -41,7 +42,12 @@ const App = () => {
         </Switch>
     );
 
-    return <div>{routes}</div>;
+    return (
+        <div>
+            <Navbar />
+            {routes}
+        </div>
+    );
 };
 
 export default App;

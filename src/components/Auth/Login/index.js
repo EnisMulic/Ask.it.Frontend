@@ -81,7 +81,7 @@ const Login = () => {
                             <ErrorMessage name="password" component="div" />
                         </div>
                         <Button type="submit" disabled={isSubmitting}>
-                            Submit
+                            Login
                         </Button>
                     </Form>
                 )}
