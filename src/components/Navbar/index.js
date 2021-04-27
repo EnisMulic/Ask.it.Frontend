@@ -57,7 +57,11 @@ const Navbar = () => {
                         </Nav.Item>
                     </>
                 ) : (
-                    <Nav.Item className="btn">Logout</Nav.Item>
+                    <Nav.Item className="btn">
+                        <Nav.Link href="#" className="text-white">
+                            Logout
+                        </Nav.Link>
+                    </Nav.Item>
                 )}
             </Nav>
         </>

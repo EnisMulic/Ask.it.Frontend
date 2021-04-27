@@ -1,8 +1,10 @@
 import * as actionTypes from "../actions/actionTypes";
 import updateObject from "../../utils/updateObject";
+import * as routeConstants from "../../constants/routes";
 
 const initialState = {
     token: null,
+    refreshToken: null,
     error: null,
     loading: false,
     authRedirectPath: null,
@@ -12,16 +14,17 @@ const authStart = (state, action) => {
     return updateObject(state, {
         error: null,
         loading: true,
-        authRedirectPath: "/",
+        authRedirectPath: routeConstants.HOME_ROUTE,
     });
 };
 
 const authSuccess = (state, action) => {
     return updateObject(state, {
         token: action.token,
+        refreshToken: action.refreshToken,
         error: null,
         loading: false,
-        authRedirectPath: "/",
+        authRedirectPath: routeConstants.HOME_ROUTE,
     });
 };
 
@@ -32,7 +35,7 @@ const authFail = (state, action) => {
     });
 };
 
-const authLogout = (state, action) => {
+const logout = (state, action) => {
     return updateObject(state, { token: null });
 };
 
@@ -48,8 +51,8 @@ const reducer = (state = initialState, action) => {
             return authSuccess(state, action);
         case actionTypes.AUTH_FAIL:
             return authFail(state, action);
-        case actionTypes.AUTH_LOGOUT:
-            return authLogout(state, action);
+        case actionTypes.LOGOUT:
+            return logout(state, action);
         case actionTypes.SET_AUTH_REDIRECT_PATH:
             return setAuthRedirectPath(state, action);
         default:

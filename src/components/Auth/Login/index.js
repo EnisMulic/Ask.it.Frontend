@@ -27,7 +27,7 @@ const Login = () => {
     const dispatch = useDispatch();
 
     const onLogin = useCallback(
-        (email, password) => dispatch(actions.auth(email, password)),
+        (email, password) => dispatch(actions.login(email, password)),
         [dispatch]
     );
 

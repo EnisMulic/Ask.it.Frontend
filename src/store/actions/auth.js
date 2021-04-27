@@ -2,6 +2,9 @@ import jwt_decode from "jwt-decode";
 
 import * as actionTypes from "./actionTypes";
 import http from "../../http";
+import * as routeConstants from "../../constants/routes";
+import * as endpointConstants from "../../constants/endpoints";
+import * as authConstants from "../../constants/auth";
 
 export const authStart = () => {
     return {
@@ -9,10 +12,11 @@ export const authStart = () => {
     };
 };
 
-export const authSuccess = (token) => {
+export const authSuccess = (token, refreshToken) => {
     return {
         type: actionTypes.AUTH_SUCCESS,
         token: token,
+        refreshToken: refreshToken,
     };
 };
 
@@ -24,10 +28,11 @@ export const authFail = (error) => {
 };
 
 export const logout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("expirationDate");
+    localStorage.removeItem(authConstants.TOKEN);
+    localStorage.removeItem(authConstants.EXPIRATION_TIME);
+    localStorage.removeItem(authConstants.REFRESH_TOKEN);
     return {
-        type: actionTypes.AUTH_LOGOUT,
+        type: actionTypes.LOGOUT,
     };
 };
 
@@ -46,31 +51,59 @@ export const setAuthRedirectPath = (path) => {
     };
 };
 
-export const auth = (email, password) => {
+const processToken = (dispatch, data) => {
+    var token = data.Token;
+    var refreshToken = data.RefreshToken;
+    var decoded = jwt_decode(token);
+
+    const expirationDate = new Date(
+        new Date().getTime() + (decoded.exp - decoded.iat) * 1000
+    );
+
+    localStorage.setItem(authConstants.TOKEN, token);
+    localStorage.setItem(authConstants.REFRESH_TOKEN, refreshToken);
+    localStorage.setItem(authConstants.EXPIRATION_TIME, expirationDate);
+
+    dispatch(authSuccess(token, refreshToken));
+    dispatch(setAuthRedirectPath(routeConstants.HOME_ROUTE));
+    dispatch(
+        checkAuthTimeout(
+            (expirationDate.getTime() - new Date().getTime()) / 1000
+        )
+    );
+};
+
+export const register = (email, password, firstName, lastName) => {
+    return (dispatch) => {
+        dispatch(authStart());
+        const authData = {
+            email: email,
+            password: password,
+            firstName: firstName,
+            lastName: lastName,
+        };
+
+        http.post(endpointConstants.REGISTER_ENDPOINT, authData)
+            .then((response) => {
+                processToken(dispatch, response.data.Data);
+            })
+            .catch((err) => {
+                dispatch(authFail(err));
+            });
+    };
+};
+
+export const login = (email, password) => {
     return (dispatch) => {
         dispatch(authStart());
         const authData = {
             email: email,
             password: password,
         };
-        http.post("/auth/login", authData)
+
+        http.post(endpointConstants.LOGIN_ENDPOINT, authData)
             .then((response) => {
-                var decoded = jwt_decode(response.data.token);
-
-                const expirationDate = new Date(
-                    new Date().getTime() + (decoded.exp - decoded.iat) * 1000
-                );
-
-                localStorage.setItem("token", response.data.token);
-                localStorage.setItem("expirationDate", expirationDate);
-
-                dispatch(authSuccess(response.data.token));
-                dispatch(setAuthRedirectPath("/"));
-                dispatch(
-                    checkAuthTimeout(
-                        (expirationDate.getTime() - new Date().getTime()) / 1000
-                    )
-                );
+                processToken(dispatch, response.data.Data);
             })
             .catch((err) => {
                 dispatch(authFail(err));
@@ -80,12 +113,13 @@ export const auth = (email, password) => {
 
 export const authCheckState = () => {
     return (dispatch) => {
-        const token = localStorage.getItem("token");
-        if (!token) {
+        const token = localStorage.getItem(authConstants.TOKEN);
+        const refreshToken = localStorage.getItem(authConstants.REFRESH_TOKEN);
+        if (!token && !refreshToken) {
             dispatch(logout());
         } else {
             const expirationDate = new Date(
-                localStorage.getItem("expirationDate")
+                localStorage.getItem(authConstants.EXPIRATION_TIME)
             );
             if (expirationDate <= new Date()) {
                 dispatch(logout());
