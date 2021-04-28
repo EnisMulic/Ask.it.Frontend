@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 import Nav from "react-bootstrap/Nav";
+import NavDropdown from "react-bootstrap/NavDropdown";
 import style from "./Navbar.module.css";
 
 import * as routeConsts from "../../constants/routes";
@@ -57,11 +58,37 @@ const Navbar = () => {
                         </Nav.Item>
                     </>
                 ) : (
-                    <Nav.Item className="btn">
-                        <Nav.Link href="#" className="text-white">
-                            Logout
-                        </Nav.Link>
-                    </Nav.Item>
+                    <>
+                        <Nav.Item className="btn">
+                            <NavDropdown
+                                title="Profile"
+                                id="basic-nav-dropdown"
+                                className={style.Dropdown}
+                            >
+                                <NavDropdown.Item
+                                    href={routeConsts.YOUR_QUESTIONS_ROUTE}
+                                >
+                                    Your Questions
+                                </NavDropdown.Item>
+                                <NavDropdown.Divider />
+                                <NavDropdown.Item
+                                    href={routeConsts.EDIT_USER_INFO_ROUTE}
+                                >
+                                    Edit Profile
+                                </NavDropdown.Item>
+                                <NavDropdown.Item
+                                    href={routeConsts.CHANGE_PASSWORD_ROUTE}
+                                >
+                                    Change Password
+                                </NavDropdown.Item>
+                            </NavDropdown>
+                        </Nav.Item>
+                        <Nav.Item className="btn">
+                            <Nav.Link href="#" className="text-white">
+                                Logout
+                            </Nav.Link>
+                        </Nav.Item>
+                    </>
                 )}
             </Nav>
         </>

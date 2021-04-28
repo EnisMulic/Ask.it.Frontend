@@ -10,9 +10,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import App from "./App";
 
 import authReducer from "./store/reducers/auth";
+import loggedInUserReducer from "./store/reducers/loggedInUser";
 
 const rootReducer = combineReducers({
     auth: authReducer,
+    loggedInUser: loggedInUserReducer,
 });
 
 const store = createStore(rootReducer, applyMiddleware(thunk));

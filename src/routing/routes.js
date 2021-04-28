@@ -5,6 +5,9 @@ import Login from "../components/Auth/Login";
 import Register from "../components/Auth/Register";
 import HotQuestions from "../components/HotQuestions";
 import TopUsers from "../components/TopUsers";
+import ChangePassword from "../components/User/ChangePassword";
+import Questions from "../components/User/Questions";
+import EditUserInfo from "../components/User/EditUserInfo";
 
 const LOGGED_IN_ROUTES = [
     {
@@ -21,6 +24,21 @@ const LOGGED_IN_ROUTES = [
         path: routeConsts.TOP_USERS_ROUTE,
         exact: false,
         component: TopUsers,
+    },
+    {
+        path: routeConsts.CHANGE_PASSWORD_ROUTE,
+        exact: false,
+        component: ChangePassword,
+    },
+    {
+        path: routeConsts.YOUR_QUESTIONS_ROUTE,
+        exact: false,
+        component: Questions,
+    },
+    {
+        path: routeConsts.EDIT_USER_INFO_ROUTE,
+        exact: false,
+        component: EditUserInfo,
     },
 ];
 

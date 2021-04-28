@@ -5,3 +5,8 @@
 .Spacer {
     flex: 1;
 }
+
+.Dropdown > a {
+    text-decoration: none;
+    color: white;
+}

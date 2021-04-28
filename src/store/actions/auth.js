@@ -5,6 +5,7 @@ import http from "../../http";
 import * as routeConstants from "../../constants/routes";
 import * as endpointConstants from "../../constants/endpoints";
 import * as authConstants from "../../constants/auth";
+import { fetchLoggedInUser } from "./loggedInUser";
 
 export const authStart = () => {
     return {
@@ -86,6 +87,7 @@ export const register = (email, password, firstName, lastName) => {
         http.post(endpointConstants.REGISTER_ENDPOINT, authData)
             .then((response) => {
                 processToken(dispatch, response.data.Data);
+                dispatch(fetchLoggedInUser());
             })
             .catch((err) => {
                 dispatch(authFail(err));
@@ -104,6 +106,7 @@ export const login = (email, password) => {
         http.post(endpointConstants.LOGIN_ENDPOINT, authData)
             .then((response) => {
                 processToken(dispatch, response.data.Data);
+                dispatch(fetchLoggedInUser());
             })
             .catch((err) => {
                 dispatch(authFail(err));
