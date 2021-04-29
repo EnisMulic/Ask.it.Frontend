@@ -205,3 +205,41 @@ export const updateUser = (firstName, lastName, email) => {
             });
     };
 };
+
+export const changePasswordStart = () => {
+    return {
+        type: actionTypes.CHANGE_PASSWORD_START,
+    };
+};
+
+export const changePasswordSuccess = () => {
+    return {
+        type: actionTypes.CHANGE_PASSWORD_SUCCESS,
+    };
+};
+
+export const changePasswordFail = (error) => {
+    return {
+        type: actionTypes.CHANGE_PASSWORD_FAIL,
+        error: error,
+    };
+};
+
+export const changePassword = (password, newPassword) => {
+    return (dispatch) => {
+        dispatch(updateUserStart());
+
+        const authData = {
+            password: password,
+            newPassword: newPassword,
+        };
+
+        http.post(endpointConstants.CHANGE_PASSWORD_ENDPOINT, authData)
+            .then((response) => {
+                dispatch(updateUserSuccess());
+            })
+            .catch((err) => {
+                dispatch(updateUserFail(err));
+            });
+    };
+};

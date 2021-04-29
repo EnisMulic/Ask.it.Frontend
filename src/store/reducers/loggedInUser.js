@@ -182,6 +182,27 @@ const updateUserFail = (state, action) => {
     });
 };
 
+const changePasswordStart = (state, action) => {
+    return updateObject(state, {
+        error: null,
+        loading: true,
+    });
+};
+
+const changePasswordSuccess = (state, action) => {
+    return updateObject(state, {
+        error: null,
+        loading: false,
+    });
+};
+
+const changePasswordFail = (state, action) => {
+    return updateObject(state, {
+        error: action.error,
+        loading: false,
+    });
+};
+
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.FETCH_LOGGED_IN_USER_START:
@@ -214,6 +235,12 @@ const reducer = (state = initialState, action) => {
             return updateUserSuccess(state, action);
         case actionTypes.UPDATE_USER_FAIL:
             return updateUserFail(state, action);
+        case actionTypes.CHANGE_PASSWORD_START:
+            return changePasswordStart(state, action);
+        case actionTypes.CHANGE_PASSWORD_SUCCESS:
+            return changePasswordSuccess(state, action);
+        case actionTypes.CHANGE_PASSWORD_FAIL:
+            return changePasswordFail(state, action);
         default:
             return state;
     }

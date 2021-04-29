@@ -32,6 +32,10 @@ export {
     updateUserStart,
     updateUserSuccess,
     updateUserFail,
+    changePassword,
+    changePasswordStart,
+    changePasswordSuccess,
+    changePasswordFail,
 } from "./loggedInUser";
 export {
     fetchLatestQuestions,
