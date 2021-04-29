@@ -1,0 +1,53 @@
+.Question {
+    border: 0.1rem solid #657786;
+    color: #14171a;
+    border-radius: 5px;
+    width: 100%;
+    min-height: 7rem;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    background-color: #f5f8fa;
+    margin: 1rem 0;
+}
+
+.Content {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-all;
+    hyphens: auto;
+}
+
+.Content:hover {
+    cursor: pointer;
+}
+
+.Content p {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    min-height: 5rem;
+    padding: 0.2rem 1rem;
+}
+
+.Wrapper {
+    display: flex;
+    align-items: center;
+    margin: 0.4rem 0;
+}
+
+.Wrapper :hover {
+    cursor: pointer;
+}
+
+.Info {
+    display: flex;
+    justify-content: space-evenly;
+    border-top: 0.1rem solid #657786;
+}
+
+.Number {
+    margin-left: 0.2rem;
+    color: #14171a;
+}

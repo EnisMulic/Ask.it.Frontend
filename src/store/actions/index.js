@@ -15,3 +15,9 @@ export {
     fetchLoggedInUserSuccess,
     fetchLoggedInUserFail,
 } from "./loggedInUser";
+export {
+    fetchLatestQuestions,
+    fetchLatestQuestionsStart,
+    fetchLatestQuestionsSuccess,
+    fetchLatestQuestionsFail,
+} from "./latestQuestions";
