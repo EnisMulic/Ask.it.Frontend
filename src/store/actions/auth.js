@@ -5,7 +5,7 @@ import http from "../../http";
 import * as routeConstants from "../../constants/routes";
 import * as endpointConstants from "../../constants/endpoints";
 import * as authConstants from "../../constants/auth";
-import { fetchLoggedInUser } from "./loggedInUser";
+import { fetchLoggedInUser, fetchLoggedInUserReset } from "./loggedInUser";
 
 export const authStart = () => {
     return {
@@ -41,6 +41,7 @@ export const checkAuthTimeout = (expirationTime) => {
     return (dispatch) => {
         setTimeout(() => {
             dispatch(logout());
+            dispatch(fetchLoggedInUserReset());
         }, expirationTime * 1000);
     };
 };

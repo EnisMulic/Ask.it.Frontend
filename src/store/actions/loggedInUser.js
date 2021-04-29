@@ -22,6 +22,12 @@ export const fetchLoggedInUserFail = (error) => {
     };
 };
 
+export const fetchLoggedInUserReset = () => {
+    return {
+        type: actionTypes.FETCH_LOGGED_IN_USER_RESET,
+    };
+};
+
 export const fetchLoggedInUser = () => {
     return (dispatch) => {
         dispatch(fetchLoggedInUserStart());

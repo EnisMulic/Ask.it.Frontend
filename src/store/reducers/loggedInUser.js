@@ -29,6 +29,10 @@ const fetchLoggedInUserFail = (state, action) => {
     });
 };
 
+const fetchLoggedInUserReset = (state, action) => {
+    return initialState;
+};
+
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.FETCH_LOGGED_IN_USER_START:
@@ -37,6 +41,8 @@ const reducer = (state = initialState, action) => {
             return fetchLoggedInUserSuccess(state, action);
         case actionTypes.FETCH_LOGGED_IN_USER_FAIL:
             return fetchLoggedInUserFail(state, action);
+        case actionTypes.FETCH_LOGGED_IN_USER_RESET:
+            return fetchLoggedInUserReset(state, action);
         default:
             return state;
     }
