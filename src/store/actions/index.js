@@ -34,3 +34,9 @@ export {
     fetchTopUsersSuccess,
     fetchTopUsersFail,
 } from "./topUsers";
+export {
+    fetchUsersQuestions,
+    fetchUsersQuestionsStart,
+    fetchUsersQuestionsSuccess,
+    fetchUsersQuestionsFail,
+} from "./usersQuestions";
