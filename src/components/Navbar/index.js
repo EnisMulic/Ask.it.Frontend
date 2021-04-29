@@ -1,14 +1,19 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useCallback } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import style from "./Navbar.module.css";
 
 import * as routeConsts from "../../constants/routes";
+import * as actions from "../../store/actions";
 
 const Navbar = () => {
     const auth = useSelector((state) => state.auth);
+    const dispatch = useDispatch();
+    const onLogout = useCallback(() => dispatch(actions.forceLogout()), [
+        dispatch,
+    ]);
 
     return (
         <>
@@ -84,7 +89,11 @@ const Navbar = () => {
                             </NavDropdown>
                         </Nav.Item>
                         <Nav.Item className="btn">
-                            <Nav.Link href="#" className="text-white">
+                            <Nav.Link
+                                href="#"
+                                className="text-white"
+                                onClick={() => onLogout()}
+                            >
                                 Logout
                             </Nav.Link>
                         </Nav.Item>

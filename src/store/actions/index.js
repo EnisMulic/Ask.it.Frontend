@@ -5,6 +5,7 @@ export {
     login,
     register,
     logout,
+    forceLogout,
     checkAuthTimeout,
     setAuthRedirectPath,
     authCheckState,

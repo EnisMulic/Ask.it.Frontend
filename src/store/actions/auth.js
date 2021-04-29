@@ -37,6 +37,13 @@ export const logout = () => {
     };
 };
 
+export const forceLogout = () => {
+    return (dispatch) => {
+        dispatch(logout());
+        dispatch(fetchLoggedInUserReset());
+    };
+};
+
 export const checkAuthTimeout = (expirationTime) => {
     return (dispatch) => {
         setTimeout(() => {
