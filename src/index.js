@@ -15,6 +15,7 @@ import App from "./App";
 import authReducer from "./store/reducers/auth";
 import loggedInUserReducer from "./store/reducers/loggedInUser";
 import latestQuestionsReducer from "./store/reducers/latestQuestions";
+import hotQuestionsReducer from "./store/reducers/hotQuestions";
 
 const persistConfig = {
     key: "root",
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
     auth: authReducer,
     loggedInUser: loggedInUserReducer,
     latestQuestions: latestQuestionsReducer,
+    hotQuestions: hotQuestionsReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

@@ -13,14 +13,14 @@ const initialState = {
     lastPage: null,
 };
 
-const fetchLatestQuestionsStart = (state, action) => {
+const fetchHotQuestionsStart = (state, action) => {
     return updateObject(state, {
         error: null,
         loading: true,
     });
 };
 
-const fetchLatestQuestionsSuccess = (state, action) => {
+const fetchHotQuestionsSuccess = (state, action) => {
     const questions = [...state.questions, ...action.payload.Data];
 
     return updateObject(state, {
@@ -36,7 +36,7 @@ const fetchLatestQuestionsSuccess = (state, action) => {
     });
 };
 
-const fetchLatestQuestionsFail = (state, action) => {
+const fetchHotQuestionsFail = (state, action) => {
     return updateObject(state, {
         error: action.error,
         loading: false,
@@ -45,12 +45,12 @@ const fetchLatestQuestionsFail = (state, action) => {
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case actionTypes.FETCH_LATEST_QUESTIONS_START:
-            return fetchLatestQuestionsStart(state, action);
-        case actionTypes.FETCH_LATEST_QUESTIONS_SUCCESS:
-            return fetchLatestQuestionsSuccess(state, action);
-        case actionTypes.FETCH_LATEST_QUESTIONS_FAIL:
-            return fetchLatestQuestionsFail(state, action);
+        case actionTypes.FETCH_HOT_QUESTIONS_START:
+            return fetchHotQuestionsStart(state, action);
+        case actionTypes.FETCH_HOT_QUESTIONS_SUCCESS:
+            return fetchHotQuestionsSuccess(state, action);
+        case actionTypes.FETCH_HOT_QUESTIONS_FAIL:
+            return fetchHotQuestionsFail(state, action);
         default:
             return state;
     }

@@ -21,3 +21,9 @@ export {
     fetchLatestQuestionsSuccess,
     fetchLatestQuestionsFail,
 } from "./latestQuestions";
+export {
+    fetchHotQuestions,
+    fetchHotQuestionsStart,
+    fetchHotQuestionsSuccess,
+    fetchHotQuestionsFail,
+} from "./hotQuestions";
