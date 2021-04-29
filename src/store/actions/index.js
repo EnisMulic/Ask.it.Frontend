@@ -28,3 +28,9 @@ export {
     fetchHotQuestionsSuccess,
     fetchHotQuestionsFail,
 } from "./hotQuestions";
+export {
+    fetchTopUsers,
+    fetchTopUsersStart,
+    fetchTopUsersSuccess,
+    fetchTopUsersFail,
+} from "./topUsers";

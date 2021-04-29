@@ -7,6 +7,7 @@ import authReducer from "./reducers/auth";
 import loggedInUserReducer from "./reducers/loggedInUser";
 import latestQuestionsReducer from "./reducers/latestQuestions";
 import hotQuestionsReducer from "./reducers/hotQuestions";
+import topUsersReducer from "./reducers/topUsers";
 
 const persistConfig = {
     key: "root",
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
     loggedInUser: loggedInUserReducer,
     latestQuestions: latestQuestionsReducer,
     hotQuestions: hotQuestionsReducer,
+    topUsers: topUsersReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
