@@ -15,6 +15,18 @@ export {
     fetchLoggedInUserSuccess,
     fetchLoggedInUserFail,
     fetchLoggedInUserReset,
+    likeQuestion,
+    likeQuestionSuccess,
+    likeQuestionFail,
+    likeQuestionUndo,
+    likeQuestionUndoSuccess,
+    likeQuestionUndoFail,
+    dislikeQuestion,
+    dislikeQuestionSuccess,
+    dislikeQuestionFail,
+    dislikeQuestionUndo,
+    dislikeQuestionUndoSuccess,
+    dislikeQuestionUndoFail,
 } from "./loggedInUser";
 export {
     fetchLatestQuestions,

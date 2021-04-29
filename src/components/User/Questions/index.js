@@ -36,7 +36,7 @@ const Questions = () => {
             queryConstants.DEFAULT_PAGE_NUMBER,
             queryConstants.DEFAULT_PAGE_SIZE
         );
-    }, [onQuestionsFetch]);
+    }, [onQuestionsFetch, userID]);
 
     if (!data.questions) {
         return (
