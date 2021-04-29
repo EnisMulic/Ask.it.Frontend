@@ -156,6 +156,32 @@ const dislikeQuestionUndoFail = (state, action) => {
     });
 };
 
+const updateUserStart = (state, action) => {
+    return updateObject(state, {
+        error: null,
+        loading: true,
+    });
+};
+
+const updateUserSuccess = (state, action) => {
+    return updateObject(state, {
+        user: updateObject(state.user, {
+            FirstName: action.FirstName,
+            LastName: action.LastName,
+            Email: action.Email,
+        }),
+        error: null,
+        loading: false,
+    });
+};
+
+const updateUserFail = (state, action) => {
+    return updateObject(state, {
+        error: action.error,
+        loading: false,
+    });
+};
+
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.FETCH_LOGGED_IN_USER_START:
@@ -182,6 +208,12 @@ const reducer = (state = initialState, action) => {
             return dislikeQuestionUndoSuccess(state, action);
         case actionTypes.DISLIKE_QUESTION_UNDO_FAIL:
             return dislikeQuestionUndoFail(state, action);
+        case actionTypes.UPDATE_USER_START:
+            return updateUserStart(state, action);
+        case actionTypes.UPDATE_USER_SUCCESS:
+            return updateUserSuccess(state, action);
+        case actionTypes.UPDATE_USER_FAIL:
+            return updateUserFail(state, action);
         default:
             return state;
     }

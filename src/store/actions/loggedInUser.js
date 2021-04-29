@@ -162,3 +162,46 @@ export const dislikeQuestionUndo = (questionID) => {
             });
     };
 };
+
+export const updateUserStart = () => {
+    return {
+        type: actionTypes.UPDATE_USER_START,
+    };
+};
+
+export const updateUserSuccess = (FirstName, LastName, Email) => {
+    return {
+        type: actionTypes.UPDATE_USER_SUCCESS,
+        FirstName: FirstName,
+        LastName: LastName,
+        Email: Email,
+    };
+};
+
+export const updateUserFail = (error) => {
+    return {
+        type: actionTypes.UPDATE_USER_FAIL,
+        error: error,
+    };
+};
+
+export const updateUser = (firstName, lastName, email) => {
+    return (dispatch) => {
+        dispatch(updateUserStart());
+
+        const authData = {
+            email: email,
+            firstName: firstName,
+            lastName: lastName,
+        };
+
+        http.post(endpointConstants.UPDATE_USER_ENDPOINT, authData)
+            .then((response) => {
+                const { FirstName, LastName, Email } = response.data.Data;
+                dispatch(updateUserSuccess(FirstName, LastName, Email));
+            })
+            .catch((err) => {
+                dispatch(updateUserFail(err));
+            });
+    };
+};

@@ -28,6 +28,10 @@ export {
     dislikeQuestionUndo,
     dislikeQuestionUndoSuccess,
     dislikeQuestionUndoFail,
+    updateUser,
+    updateUserStart,
+    updateUserSuccess,
+    updateUserFail,
 } from "./loggedInUser";
 export {
     fetchLatestQuestions,
