@@ -21,7 +21,13 @@ const fetchHotQuestionsStart = (state, action) => {
 };
 
 const fetchHotQuestionsSuccess = (state, action) => {
-    const questions = [...state.questions, ...action.payload.Data];
+    var questions = [...state.questions];
+
+    if (action.payload.PageNumber !== state.pageNumber) {
+        questions = [...questions, ...action.payload.Data];
+    } else {
+        questions = [...action.payload.Data];
+    }
 
     return updateObject(state, {
         questions: questions,

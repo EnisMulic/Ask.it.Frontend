@@ -1,0 +1,32 @@
+.User {
+    border: 0.1rem solid #657786;
+    color: #14171a;
+    border-radius: 5px;
+    width: 100%;
+    min-height: 7rem;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    background-color: #f5f8fa;
+    margin: 1rem 0;
+    padding: 1rem 0;
+}
+
+.Wrapper {
+    display: flex;
+    align-items: center;
+    margin-top: 0.2rem;
+}
+
+.MessageIcon {
+    margin-right: 0.2rem;
+    margin-left: 0.5rem;
+}
+
+.Info {
+    size: 1rem;
+}
+
+.Text {
+    padding: 0 0.2rem;
+}
