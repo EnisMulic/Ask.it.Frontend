@@ -7,6 +7,7 @@ import style from "./Navbar.module.css";
 
 import * as routeConsts from "../../constants/routes";
 import * as actions from "../../store/actions";
+import Notifications from "../Notifications";
 
 const Navbar = () => {
     const auth = useSelector((state) => state.auth);
@@ -87,6 +88,9 @@ const Navbar = () => {
                                     Change Password
                                 </NavDropdown.Item>
                             </NavDropdown>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Notifications />
                         </Nav.Item>
                         <Nav.Item className="btn">
                             <Nav.Link

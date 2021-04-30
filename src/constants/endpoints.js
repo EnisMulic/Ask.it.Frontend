@@ -40,3 +40,5 @@ export const LIKE_ANSWER_UNDO_ENDPOINT =
 export const DISLIKE_ANSWER_ENDPOINT = ANSWER_BASE_ENDPOINT + "/{id}/dislike";
 export const DISLIKE_ANSWER_UNDO_ENDPOINT =
     ANSWER_BASE_ENDPOINT + "/{id}/dislike/undo";
+
+export const NOTIFICATIONS_ENDPOINT = "/ws/notifications/{id}";
