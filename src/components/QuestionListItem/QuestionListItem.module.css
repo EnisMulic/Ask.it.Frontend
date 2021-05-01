@@ -11,6 +11,11 @@
     margin: 1rem 0;
 }
 
+.Question a {
+    text-decoration: none;
+    color: #14171a;
+}
+
 .Content {
     overflow-wrap: break-word;
     word-wrap: break-word;
