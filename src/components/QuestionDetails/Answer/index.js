@@ -2,6 +2,8 @@ import React, { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ThumbsUp, ThumbsDown, User } from "react-feather";
 
+import * as actions from "../../../store/actions";
+
 import style from "./Answer.module.css";
 
 const Answer = (props) => {
@@ -10,29 +12,42 @@ const Answer = (props) => {
     const user = useSelector((state) => state.loggedInUser.user);
     const dispatch = useDispatch();
 
+    const onLikeAnswer = useCallback(
+        (AnswerID) => dispatch(actions.likeAnswer(AnswerID)),
+        [dispatch]
+    );
+    const onLikeAnswerUndo = useCallback(
+        (AnswerID) => dispatch(actions.likeAnswerUndo(AnswerID)),
+        [dispatch]
+    );
+
+    const onDislikeAnswer = useCallback(
+        (AnswerID) => dispatch(actions.dislikeAnswer(AnswerID)),
+        [dispatch]
+    );
+    const onDislikeAnswerUndo = useCallback(
+        (AnswerID) => dispatch(actions.dislikeAnswerUndo(AnswerID)),
+        [dispatch]
+    );
+
     var thumbsUp = <ThumbsUp size="21" />;
 
     if (user !== null) {
         if (
             user.AnswerRatings &&
             user.AnswerRatings.find(
-                (item) => item.QuestionID === ID && item.IsLiked === true
+                (item) => item.AnswerID === ID && item.IsLiked === true
             )
         ) {
             thumbsUp = (
                 <ThumbsUp
                     size="21"
                     fill={"#828282"}
-                    //onClick={() => onLikeQuestionUndo(ID)}
+                    onClick={() => onLikeAnswerUndo(ID)}
                 />
             );
         } else {
-            thumbsUp = (
-                <ThumbsUp
-                    size="21"
-                    //onClick={() => onLikeQuestion(ID)}
-                />
-            );
+            thumbsUp = <ThumbsUp size="21" onClick={() => onLikeAnswer(ID)} />;
         }
     }
 
@@ -42,22 +57,19 @@ const Answer = (props) => {
         if (
             user.AnswerRatings &&
             user.AnswerRatings.find(
-                (item) => item.QuestionID === ID && item.IsLiked === false
+                (item) => item.AnswerID === ID && item.IsLiked === false
             )
         ) {
             thumbsDown = (
                 <ThumbsDown
                     size="21"
                     fill={"#828282"}
-                    //onClick={() => onDislikeQuestionUndo(ID)}
+                    onClick={() => onDislikeAnswerUndo(ID)}
                 />
             );
         } else {
             thumbsDown = (
-                <ThumbsDown
-                    size="21"
-                    //onClick={() => onDislikeQuestion(ID)}
-                />
+                <ThumbsDown size="21" onClick={() => onDislikeAnswer(ID)} />
             );
         }
     }

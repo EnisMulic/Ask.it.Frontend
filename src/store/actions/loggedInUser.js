@@ -250,3 +250,121 @@ export const addNotification = (notification) => {
         notification: notification,
     };
 };
+
+export const likeAnswerSuccess = (answerID) => {
+    return {
+        type: actionTypes.LIKE_ANSWER_SUCCESS,
+        answerID: answerID,
+    };
+};
+
+export const likeAnswerFail = (error) => {
+    return {
+        type: actionTypes.LIKE_ANSWER_FAIL,
+        error: error,
+    };
+};
+
+export const likeAnswer = (answerID) => {
+    return (dispatch) => {
+        http.post(
+            endpointConstants.LIKE_ANSWER_ENDPOINT.replace("{id}", answerID)
+        )
+            .then(() => {
+                dispatch(likeAnswerSuccess(answerID));
+            })
+            .catch((err) => {
+                dispatch(likeAnswerFail(err));
+            });
+    };
+};
+
+export const likeAnswerUndoSuccess = (answerID) => {
+    return {
+        type: actionTypes.LIKE_ANSWER_UNDO_SUCCESS,
+        answerID: answerID,
+    };
+};
+
+export const likeAnswerUndoFail = (error) => {
+    return {
+        type: actionTypes.LIKE_ANSWER_UNDO_FAIL,
+        error: error,
+    };
+};
+
+export const likeAnswerUndo = (answerID) => {
+    return (dispatch) => {
+        http.post(
+            endpointConstants.LIKE_ANSWER_UNDO_ENDPOINT.replace(
+                "{id}",
+                answerID
+            )
+        )
+            .then(() => {
+                dispatch(likeAnswerUndoSuccess(answerID));
+            })
+            .catch((err) => {
+                dispatch(likeAnswerUndoFail(err));
+            });
+    };
+};
+
+export const dislikeAnswerSuccess = (answerID) => {
+    return {
+        type: actionTypes.DISLIKE_ANSWER_SUCCESS,
+        answerID: answerID,
+    };
+};
+
+export const dislikeAnswerFail = (error) => {
+    return {
+        type: actionTypes.DISLIKE_ANSWER_FAIL,
+        error: error,
+    };
+};
+
+export const dislikeAnswer = (answerID) => {
+    return (dispatch) => {
+        http.post(
+            endpointConstants.DISLIKE_ANSWER_ENDPOINT.replace("{id}", answerID)
+        )
+            .then(() => {
+                dispatch(dislikeAnswerSuccess(answerID));
+            })
+            .catch((err) => {
+                dispatch(dislikeAnswerFail(err));
+            });
+    };
+};
+
+export const dislikeAnswerUndoSuccess = (answerID) => {
+    return {
+        type: actionTypes.DISLIKE_ANSWER_UNDO_SUCCESS,
+        answerID: answerID,
+    };
+};
+
+export const dislikeAnswerUndoFail = (error) => {
+    return {
+        type: actionTypes.DISLIKE_ANSWER_UNDO_FAIL,
+        error: error,
+    };
+};
+
+export const dislikeAnswerUndo = (answerID) => {
+    return (dispatch) => {
+        http.post(
+            endpointConstants.DISLIKE_ANSWER_UNDO_ENDPOINT.replace(
+                "{id}",
+                answerID
+            )
+        )
+            .then(() => {
+                dispatch(dislikeAnswerUndoSuccess(answerID));
+            })
+            .catch((err) => {
+                dispatch(dislikeAnswerUndoFail(err));
+            });
+    };
+};

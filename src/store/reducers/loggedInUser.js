@@ -217,6 +217,125 @@ const addNotification = (state, action) => {
     });
 };
 
+const likeAnswerSuccess = (state, action) => {
+    const ratings = state.user.QuestionRatings;
+
+    if (ratings) {
+        const i = ratings.findIndex(
+            (item) => item.QuestionID === action.questionID
+        );
+
+        if (i === -1) {
+            ratings.push({
+                QuestionID: action.questionID,
+                IsLiked: true,
+            });
+        } else {
+            ratings[i].IsLiked = true;
+        }
+    }
+
+    return updateObject(state, {
+        user: updateObject(state.user, {
+            QuestionRatings: ratings,
+        }),
+        error: null,
+        loading: false,
+    });
+};
+
+const likeAnswerFail = (state, action) => {
+    return updateObject(state, {
+        error: action.error,
+        loading: false,
+    });
+};
+
+const likeAnswerUndoSuccess = (state, action) => {
+    var ratings = state.user.AnswerRatings;
+
+    if (ratings) {
+        ratings = ratings.filter((item) => {
+            return item.AnswerID !== action.answerID && item.IsLiked !== true;
+        });
+    }
+
+    return updateObject(state, {
+        user: updateObject(state.user, {
+            AnswerRatings: ratings,
+        }),
+        error: null,
+        loading: false,
+    });
+};
+
+const likeAnswerUndoFail = (state, action) => {
+    return updateObject(state, {
+        error: action.error,
+        loading: false,
+    });
+};
+
+const dislikeAnswerSuccess = (state, action) => {
+    const ratings = state.user.AnswerRatings;
+
+    if (ratings) {
+        const i = ratings.findIndex(
+            (item) => item.AnswerID === action.answerID
+        );
+
+        if (i === -1) {
+            ratings.push({
+                AnswerID: action.answerID,
+                IsLiked: false,
+            });
+        } else {
+            ratings[i].IsLiked = false;
+        }
+    }
+
+    return updateObject(state, {
+        user: updateObject(state.user, {
+            AnswerRatings: ratings,
+        }),
+        error: null,
+        loading: false,
+    });
+};
+
+const dislikeAnswerFail = (state, action) => {
+    return updateObject(state, {
+        error: action.error,
+        loading: false,
+    });
+};
+
+const dislikeAnswerUndoSuccess = (state, action) => {
+    var ratings = state.user.AnswerRatings;
+
+    if (ratings) {
+        ratings = ratings.filter(
+            (item) =>
+                item.AnswerID !== action.answerID && item.IsLiked !== false
+        );
+    }
+
+    return updateObject(state, {
+        user: updateObject(state.user, {
+            AnswerRatings: ratings,
+        }),
+        error: null,
+        loading: false,
+    });
+};
+
+const dislikeAnswerUndoFail = (state, action) => {
+    return updateObject(state, {
+        error: action.error,
+        loading: false,
+    });
+};
+
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.FETCH_LOGGED_IN_USER_START:
@@ -257,6 +376,22 @@ const reducer = (state = initialState, action) => {
             return changePasswordFail(state, action);
         case actionTypes.ADD_NOTIFICATION:
             return addNotification(state, action);
+        case actionTypes.LIKE_ANSWER_SUCCESS:
+            return likeAnswerSuccess(state, action);
+        case actionTypes.LIKE_ANSWER_FAIL:
+            return likeAnswerFail(state, action);
+        case actionTypes.LIKE_ANSWER_UNDO_SUCCESS:
+            return likeAnswerUndoSuccess(state, action);
+        case actionTypes.LIKE_ANSWER_UNDO_FAIL:
+            return likeAnswerUndoFail(state, action);
+        case actionTypes.DISLIKE_ANSWER_SUCCESS:
+            return dislikeAnswerSuccess(state, action);
+        case actionTypes.DISLIKE_ANSWER_FAIL:
+            return dislikeAnswerFail(state, action);
+        case actionTypes.DISLIKE_ANSWER_UNDO_SUCCESS:
+            return dislikeAnswerUndoSuccess(state, action);
+        case actionTypes.DISLIKE_ANSWER_UNDO_FAIL:
+            return dislikeAnswerUndoFail(state, action);
         default:
             return state;
     }
