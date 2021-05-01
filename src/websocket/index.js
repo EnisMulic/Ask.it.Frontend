@@ -2,7 +2,7 @@ import * as endpointConstants from "../constants/endpoints";
 import * as authConstants from "../constants/auth";
 
 var socket = new WebSocket(
-    "ws://localhost:5000" +
+    process.env.REACT_APP_ASKIT_API_WS +
         endpointConstants.NOTIFICATIONS_ENDPOINT.replace(
             "{id}",
             localStorage.getItem(authConstants.USER_ID)
