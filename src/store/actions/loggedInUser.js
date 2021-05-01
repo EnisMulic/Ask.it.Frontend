@@ -243,3 +243,10 @@ export const changePassword = (password, newPassword) => {
             });
     };
 };
+
+export const addNotification = (notification) => {
+    return {
+        type: actionTypes.ADD_NOTIFICATION,
+        notification: notification,
+    };
+};

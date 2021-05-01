@@ -1,10 +1,15 @@
 import * as endpointConstants from "../constants/endpoints";
+import * as authConstants from "../constants/auth";
 
 var socket = new WebSocket(
-    "ws://localhost:5000" + endpointConstants.NOTIFICATIONS_ENDPOINT
+    "ws://localhost:5000" +
+        endpointConstants.NOTIFICATIONS_ENDPOINT.replace(
+            "{id}",
+            localStorage.getItem(authConstants.USER_ID)
+        )
 );
 
-let connect = () => {
+let connect = (callback) => {
     console.log("Attempting Connection...");
 
     socket.onopen = () => {
@@ -13,6 +18,7 @@ let connect = () => {
 
     socket.onmessage = (msg) => {
         console.log(msg);
+        callback(msg);
     };
 
     socket.onclose = (event) => {

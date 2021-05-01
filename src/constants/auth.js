@@ -6,3 +6,4 @@ export const PASSWORDS_MUST_MATCH_ERROR = "Passwords must match";
 export const TOKEN = "token";
 export const REFRESH_TOKEN = "refreshToken";
 export const EXPIRATION_TIME = "expirationTime";
+export const USER_ID = "user_id";

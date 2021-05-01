@@ -36,6 +36,7 @@ export {
     changePasswordStart,
     changePasswordSuccess,
     changePasswordFail,
+    addNotification,
 } from "./loggedInUser";
 export {
     fetchLatestQuestions,

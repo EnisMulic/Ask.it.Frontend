@@ -65,6 +65,7 @@ const Navbar = () => {
                     </>
                 ) : (
                     <>
+                        <Notifications className={style.Dropdown} />
                         <Nav.Item className="btn">
                             <NavDropdown
                                 title="Profile"
@@ -88,9 +89,6 @@ const Navbar = () => {
                                     Change Password
                                 </NavDropdown.Item>
                             </NavDropdown>
-                        </Nav.Item>
-                        <Nav.Item>
-                            <Notifications />
                         </Nav.Item>
                         <Nav.Item className="btn">
                             <Nav.Link

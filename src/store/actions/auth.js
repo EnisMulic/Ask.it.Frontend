@@ -32,6 +32,7 @@ export const logout = () => {
     localStorage.removeItem(authConstants.TOKEN);
     localStorage.removeItem(authConstants.EXPIRATION_TIME);
     localStorage.removeItem(authConstants.REFRESH_TOKEN);
+    localStorage.removeItem(authConstants.USER_ID);
     return {
         type: actionTypes.LOGOUT,
     };
@@ -72,6 +73,7 @@ const processToken = (dispatch, data) => {
     localStorage.setItem(authConstants.TOKEN, token);
     localStorage.setItem(authConstants.REFRESH_TOKEN, refreshToken);
     localStorage.setItem(authConstants.EXPIRATION_TIME, expirationDate);
+    localStorage.setItem(authConstants.USER_ID, decoded.sub);
 
     dispatch(authSuccess(token, refreshToken));
     dispatch(setAuthRedirectPath(routeConstants.HOME_ROUTE));

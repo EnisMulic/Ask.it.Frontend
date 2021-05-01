@@ -203,6 +203,20 @@ const changePasswordFail = (state, action) => {
     });
 };
 
+const addNotification = (state, action) => {
+    const newNotifications = [
+        ...state.user.AnswerNotifications,
+        action.notification,
+    ];
+
+    return updateObject(state, {
+        user: updateObject(state.user, {
+            AnswerNotifications: newNotifications,
+        }),
+        loading: false,
+    });
+};
+
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.FETCH_LOGGED_IN_USER_START:
@@ -241,6 +255,8 @@ const reducer = (state = initialState, action) => {
             return changePasswordSuccess(state, action);
         case actionTypes.CHANGE_PASSWORD_FAIL:
             return changePasswordFail(state, action);
+        case actionTypes.ADD_NOTIFICATION:
+            return addNotification(state, action);
         default:
             return state;
     }

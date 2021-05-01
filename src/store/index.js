@@ -13,7 +13,7 @@ import usersQuestionsReducer from "./reducers/usersQuestions";
 const persistConfig = {
     key: "root",
     storage,
-    whitelist: ["loggedInUser"],
+    whitelist: ["loggedInUser", "notifications"],
 };
 
 const rootReducer = combineReducers({

@@ -1,0 +1,16 @@
+.Dropdown > a {
+    text-decoration: none;
+    color: white;
+    display: flex;
+}
+
+.IconSpan {
+    display: flex;
+    margin-top: 0.4rem;
+}
+
+.Icon {
+    color: white;
+    margin-top: 0.2rem;
+    margin-right: 0.2rem;
+}
