@@ -73,4 +73,8 @@ export {
     fetchUsersQuestionsStart,
     fetchUsersQuestionsSuccess,
     fetchUsersQuestionsFail,
+    addQuestion,
+    addQuestionStart,
+    addQuestionSuccess,
+    addQuestionFail,
 } from "./usersQuestions";

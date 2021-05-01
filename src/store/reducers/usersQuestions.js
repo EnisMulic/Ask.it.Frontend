@@ -49,6 +49,30 @@ const fetchUsersQuestionsFail = (state, action) => {
     });
 };
 
+const addQuestionStart = (state, action) => {
+    return updateObject(state, {
+        error: null,
+        loading: true,
+    });
+};
+
+const addQuestionSuccess = (state, action) => {
+    var questions = [action.question, ...state.questions];
+
+    return updateObject(state, {
+        questions: questions,
+        error: null,
+        loading: false,
+    });
+};
+
+const addQuestionFail = (state, action) => {
+    return updateObject(state, {
+        error: action.error,
+        loading: false,
+    });
+};
+
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.FETCH_USERS_QUESTIONS_START:
@@ -57,6 +81,12 @@ const reducer = (state = initialState, action) => {
             return fetchUsersQuestionsSuccess(state, action);
         case actionTypes.FETCH_USERS_QUESTIONS_FAIL:
             return fetchUsersQuestionsFail(state, action);
+        case actionTypes.ADD_QUESTION_START:
+            return addQuestionStart(state, action);
+        case actionTypes.ADD_QUESTION_SUCCESS:
+            return addQuestionSuccess(state, action);
+        case actionTypes.ADD_QUESTION_FAIL:
+            return addQuestionFail(state, action);
         default:
             return state;
     }

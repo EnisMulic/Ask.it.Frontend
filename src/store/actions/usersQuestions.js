@@ -44,3 +44,41 @@ export const fetchUsersQuestions = (id, pageNumber, pageSize) => {
             });
     };
 };
+
+export const addQuestionStart = () => {
+    return {
+        type: actionTypes.ADD_QUESTION_START,
+    };
+};
+
+export const addQuestionSuccess = (question) => {
+    return {
+        type: actionTypes.ADD_QUESTION_SUCCESS,
+        question: question,
+    };
+};
+
+export const addQuestionFail = (error) => {
+    return {
+        type: actionTypes.ADD_QUESTION_FAIL,
+        error: error,
+    };
+};
+
+export const addQuestion = (content) => {
+    return (dispatch) => {
+        dispatch(fetchUsersQuestionsStart());
+
+        var question = {
+            content: content,
+        };
+
+        http.post(endpointConstants.CREATE_QUESTION_ENDPOINT, question)
+            .then((response) => {
+                dispatch(addQuestionSuccess(response.data));
+            })
+            .catch((err) => {
+                dispatch(addQuestionFail(err));
+            });
+    };
+};

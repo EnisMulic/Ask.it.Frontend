@@ -27,7 +27,7 @@
     cursor: pointer;
 }
 
-.Content p {
+.Content div {
     display: flex;
     align-content: center;
     justify-content: center;

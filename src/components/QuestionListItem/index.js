@@ -1,6 +1,7 @@
 import React, { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ThumbsUp, ThumbsDown } from "react-feather";
+import parse from "html-react-parser";
 
 import * as actions from "../../store/actions";
 
@@ -79,7 +80,7 @@ const QuestionListItem = (props) => {
         <div className={style.Question}>
             <a href={routeConstants.QUESTION_DETAILS_ROUTE.replace(":id", ID)}>
                 <div className={style.Content}>
-                    <p>{Content}</p>
+                    <div>{parse(Content)}</div>
                 </div>
             </a>
             <div className={style.Info}>

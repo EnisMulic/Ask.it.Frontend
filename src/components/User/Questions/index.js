@@ -8,6 +8,7 @@ import * as queryConstants from "../../../constants/query";
 import QuestionListItem from "../../QuestionListItem";
 
 import style from "./Questions.module.css";
+import NewQuestion from "../../NewQuestion";
 
 const Questions = () => {
     const dispatch = useDispatch();
@@ -21,6 +22,7 @@ const Questions = () => {
     );
 
     const data = useSelector((state) => state.usersQuestions);
+    const auth = useSelector((state) => state.auth);
 
     const getNext = () => {
         onQuestionsFetch(
@@ -53,6 +55,7 @@ const Questions = () => {
 
     return (
         <div className={style.Questions}>
+            {auth.token && <NewQuestion />}
             {data.questions.map((question) => {
                 return (
                     <QuestionListItem
