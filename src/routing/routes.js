@@ -8,6 +8,7 @@ import TopUsers from "../components/TopUsers";
 import ChangePassword from "../components/User/ChangePassword";
 import Questions from "../components/User/Questions";
 import EditUserInfo from "../components/User/EditUserInfo";
+import QuestionDetails from "../components/QuestionDetails";
 
 const LOGGED_IN_ROUTES = [
     {
@@ -32,13 +33,18 @@ const LOGGED_IN_ROUTES = [
     },
     {
         path: routeConsts.YOUR_QUESTIONS_ROUTE,
-        exact: false,
+        exact: true,
         component: Questions,
     },
     {
         path: routeConsts.EDIT_USER_INFO_ROUTE,
         exact: false,
         component: EditUserInfo,
+    },
+    {
+        path: routeConsts.QUESTION_DETAILS_ROUTE,
+        exact: false,
+        component: QuestionDetails,
     },
 ];
 
@@ -67,6 +73,11 @@ const LOGGED_OUT_ROUTES = [
         path: routeConsts.REGISTER_ROUTE,
         exact: false,
         component: Register,
+    },
+    {
+        path: routeConsts.QUESTION_DETAILS_ROUTE,
+        exact: false,
+        component: QuestionDetails,
     },
 ];
 
