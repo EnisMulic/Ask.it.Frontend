@@ -8,9 +8,10 @@ import * as actions from "../../store/actions";
 import style from "./QuestionListItem.module.css";
 
 import * as routeConstants from "../../constants/routes";
+import DeleteQuestion from "../DeleteQuestion";
 
 const QuestionListItem = (props) => {
-    const { ID, Content, Likes, Dislikes } = props;
+    const { ID, Content, Likes, Dislikes, User } = props;
     const user = useSelector((state) => state.loggedInUser.user);
     const dispatch = useDispatch();
 
@@ -78,6 +79,12 @@ const QuestionListItem = (props) => {
 
     return (
         <div className={style.Question}>
+            <div className={style.Actions}>
+                <div className={style.Spacer} />
+                {user && user.ID === User.ID ? (
+                    <DeleteQuestion id={ID} />
+                ) : null}
+            </div>
             <a href={routeConstants.QUESTION_DETAILS_ROUTE.replace(":id", ID)}>
                 <div className={style.Content}>
                     <div>{parse(Content)}</div>
