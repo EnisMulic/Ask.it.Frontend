@@ -1,7 +1,17 @@
 import React, { useState, useRef, useCallback } from "react";
 import { useDispatch } from "react-redux";
-import { Editor } from "@tinymce/tinymce-react";
 import Button from "react-bootstrap/Button";
+
+import "tinymce/tinymce";
+import "tinymce/icons/default";
+import "tinymce/themes/silver";
+import "tinymce/plugins/paste";
+import "tinymce/plugins/link";
+import "tinymce/plugins/table";
+import "tinymce/skins/ui/oxide/skin.min.css";
+import "tinymce/skins/ui/oxide/content.min.css";
+import "tinymce/skins/content/default/content.min.css";
+import { Editor } from "@tinymce/tinymce-react";
 
 import Modal from "../Modal";
 
