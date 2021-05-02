@@ -7,6 +7,8 @@ import * as endpointConstants from "../../constants/endpoints";
 import QuestionListItem from "../QuestionListItem";
 import Answer from "./Answer";
 
+import CreateAnswer from "../CreateAnswer";
+
 import style from "./QuestionDetails.module.css";
 
 const QuestionDetails = (props) => {
@@ -31,12 +33,8 @@ const QuestionDetails = (props) => {
             {question ? (
                 <>
                     <div className={style.Question}>
-                        <QuestionListItem
-                            ID={question.ID}
-                            Content={question.Content}
-                            Likes={question.Likes}
-                            Dislikes={question.Dislikes}
-                        />
+                        <QuestionListItem {...question} />
+                        <CreateAnswer questionId={id} />
                         {question.Answers &&
                             question.Answers.map((answer) => {
                                 return (

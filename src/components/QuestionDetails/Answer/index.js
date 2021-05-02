@@ -1,6 +1,7 @@
 import React, { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ThumbsUp, ThumbsDown, User } from "react-feather";
+import parse from "html-react-parser";
 
 import * as actions from "../../../store/actions";
 
@@ -77,7 +78,7 @@ const Answer = (props) => {
     return (
         <div className={style.Answer}>
             <div className={style.Wrapper}>
-                <div className={style.Content}>{Content}</div>
+                <div className={style.Content}>{parse(Content)}</div>
             </div>
             <div className={style.Info}>
                 <User className={style.Icon} />
