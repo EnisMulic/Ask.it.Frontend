@@ -6,6 +6,7 @@ import parse from "html-react-parser";
 import * as actions from "../../../store/actions";
 
 import style from "./Answer.module.css";
+import DeleteAnswer from "../../DeleteAnswer";
 
 const Answer = (props) => {
     const { ID, Content, Likes, Dislikes, CreatedAt } = props;
@@ -77,6 +78,12 @@ const Answer = (props) => {
 
     return (
         <div className={style.Answer}>
+            <div className={style.Actions}>
+                <div className={style.Spacer} />
+                {user && user.ID === props.User.ID ? (
+                    <DeleteAnswer id={ID} />
+                ) : null}
+            </div>
             <div className={style.Wrapper}>
                 <div className={style.Content}>{parse(Content)}</div>
             </div>

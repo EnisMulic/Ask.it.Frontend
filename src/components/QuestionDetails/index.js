@@ -20,6 +20,7 @@ const QuestionDetails = (props) => {
             endpointConstants.GET_QUESTION_BY_ID_ENDPOINT.replace("{id}", id)
         )
             .then((response) => {
+                console.log(response.data.Data);
                 setQuestion(response.data.Data);
             })
             .catch((err) => console.log(err));
