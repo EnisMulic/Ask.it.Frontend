@@ -1,6 +1,7 @@
 import React, { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ThumbsUp, ThumbsDown } from "react-feather";
+import { Link } from "react-router-dom";
 import parse from "html-react-parser";
 
 import * as actions from "../../store/actions";
@@ -85,11 +86,11 @@ const QuestionListItem = (props) => {
                     <DeleteQuestion id={ID} />
                 ) : null}
             </div>
-            <a href={routeConstants.QUESTION_DETAILS_ROUTE.replace(":id", ID)}>
+            <Link to={routeConstants.QUESTION_DETAILS_ROUTE.replace(":id", ID)}>
                 <div className={style.Content}>
                     <div>{parse(Content)}</div>
                 </div>
-            </a>
+            </Link>
             <div className={style.Info}>
                 <div className={style.Wrapper}>
                     {thumbsUp}

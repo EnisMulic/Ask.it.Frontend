@@ -1,5 +1,6 @@
 import React, { useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
@@ -20,46 +21,35 @@ const Navbar = () => {
         <>
             <Nav className={style.Nav}>
                 <Nav.Item className="btn">
-                    <Nav.Link
-                        href={routeConsts.HOME_ROUTE}
-                        className="text-white"
-                    >
-                        Home
+                    <Nav.Link>
+                        <Link to={routeConsts.HOME_ROUTE}>Home</Link>
                     </Nav.Link>
                 </Nav.Item>
                 <Nav.Item className="btn">
-                    <Nav.Link
-                        href={routeConsts.HOT_QUESTIONS_ROUTE}
-                        className="text-white"
-                    >
-                        Hot Questions
+                    <Nav.Link>
+                        <Link to={routeConsts.HOT_QUESTIONS_ROUTE}>
+                            Hot Questions
+                        </Link>
                     </Nav.Link>
                 </Nav.Item>
                 <Nav.Item className="btn">
-                    <Nav.Link
-                        href={routeConsts.TOP_USERS_ROUTE}
-                        className="text-white"
-                    >
-                        Top Users
+                    <Nav.Link>
+                        <Link to={routeConsts.TOP_USERS_ROUTE}>Top Users</Link>
                     </Nav.Link>
                 </Nav.Item>
                 <div className={style.Spacer} />
                 {auth.token === null ? (
                     <>
                         <Nav.Item className="btn">
-                            <Nav.Link
-                                href={routeConsts.LOGIN_ROUTE}
-                                className="text-white"
-                            >
-                                Login
+                            <Nav.Link>
+                                <Link to={routeConsts.LOGIN_ROUTE}>Login</Link>
                             </Nav.Link>
                         </Nav.Item>
                         <Nav.Item className="btn">
-                            <Nav.Link
-                                href={routeConsts.REGISTER_ROUTE}
-                                className="text-white"
-                            >
-                                Register
+                            <Nav.Link>
+                                <Link to={routeConsts.REGISTER_ROUTE}>
+                                    Register
+                                </Link>
                             </Nav.Link>
                         </Nav.Item>
                     </>
@@ -73,20 +63,28 @@ const Navbar = () => {
                                 className={style.Dropdown}
                             >
                                 <NavDropdown.Item
-                                    href={routeConsts.YOUR_QUESTIONS_ROUTE}
+                                    className={style.DropdownItem}
                                 >
-                                    Your Questions
+                                    <Link to={routeConsts.YOUR_QUESTIONS_ROUTE}>
+                                        Your Questions
+                                    </Link>
                                 </NavDropdown.Item>
                                 <NavDropdown.Divider />
                                 <NavDropdown.Item
-                                    href={routeConsts.EDIT_USER_INFO_ROUTE}
+                                    className={style.DropdownItem}
                                 >
-                                    Edit Profile
+                                    <Link to={routeConsts.EDIT_USER_INFO_ROUTE}>
+                                        Edit Profile
+                                    </Link>
                                 </NavDropdown.Item>
                                 <NavDropdown.Item
-                                    href={routeConsts.CHANGE_PASSWORD_ROUTE}
+                                    className={style.DropdownItem}
                                 >
-                                    Change Password
+                                    <Link
+                                        to={routeConsts.CHANGE_PASSWORD_ROUTE}
+                                    >
+                                        Change Password
+                                    </Link>
                                 </NavDropdown.Item>
                             </NavDropdown>
                         </Nav.Item>

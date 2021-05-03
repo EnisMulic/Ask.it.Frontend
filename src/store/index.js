@@ -10,12 +10,6 @@ import hotQuestionsReducer from "./reducers/hotQuestions";
 import topUsersReducer from "./reducers/topUsers";
 import usersQuestionsReducer from "./reducers/usersQuestions";
 
-const persistConfig = {
-    key: "root",
-    storage,
-    whitelist: ["loggedInUser", "notifications"],
-};
-
 const rootReducer = combineReducers({
     auth: authReducer,
     loggedInUser: loggedInUserReducer,
@@ -25,8 +19,7 @@ const rootReducer = combineReducers({
     usersQuestions: usersQuestionsReducer,
 });
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
-const store = createStore(persistedReducer, applyMiddleware(thunk));
+const store = createStore(rootReducer, applyMiddleware(thunk));
 
 let persistor = persistStore(store);
 
