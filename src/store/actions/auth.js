@@ -62,8 +62,8 @@ export const setAuthRedirectPath = (path) => {
 };
 
 const processToken = (dispatch, data) => {
-    var token = data.Token;
-    var refreshToken = data.RefreshToken;
+    var token = data.token;
+    var refreshToken = data.refreshToken;
     var decoded = jwt_decode(token);
 
     const expirationDate = new Date(
@@ -96,7 +96,7 @@ export const register = (email, password, firstName, lastName) => {
 
         http.post(endpointConstants.REGISTER_ENDPOINT, authData)
             .then((response) => {
-                processToken(dispatch, response.data.Data);
+                processToken(dispatch, response.data.data);
                 dispatch(fetchLoggedInUser());
             })
             .catch((err) => {
@@ -115,7 +115,7 @@ export const login = (email, password) => {
 
         http.post(endpointConstants.LOGIN_ENDPOINT, authData)
             .then((response) => {
-                processToken(dispatch, response.data.Data);
+                processToken(dispatch, response.data.data);
                 dispatch(fetchLoggedInUser());
             })
             .catch((err) => {

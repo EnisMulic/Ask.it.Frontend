@@ -34,16 +34,16 @@ const fetchLoggedInUserReset = (state, action) => {
 };
 
 const likeQuestionSuccess = (state, action) => {
-    const ratings = state.user.QuestionRatings;
+    const ratings = state.user.questionRatings;
 
     if (ratings) {
         const i = ratings.findIndex(
-            (item) => item.QuestionID === action.questionID
+            (item) => item.questionId === action.questionId
         );
 
         if (i === -1) {
             ratings.push({
-                QuestionID: action.questionID,
+                questionId: action.questionId,
                 IsLiked: true,
             });
         } else {
@@ -53,7 +53,7 @@ const likeQuestionSuccess = (state, action) => {
 
     return updateObject(state, {
         user: updateObject(state.user, {
-            QuestionRatings: ratings,
+            questionRatings: ratings,
         }),
         error: null,
         loading: false,
@@ -68,19 +68,19 @@ const likeQuestionFail = (state, action) => {
 };
 
 const likeQuestionUndoSuccess = (state, action) => {
-    var ratings = state.user.QuestionRatings;
+    var ratings = state.user.questionRatings;
 
     if (ratings) {
         ratings = ratings.filter((item) => {
             return (
-                item.QuestionID !== action.questionID && item.IsLiked !== true
+                item.questionId !== action.questionId && item.isLiked !== true
             );
         });
     }
 
     return updateObject(state, {
         user: updateObject(state.user, {
-            QuestionRatings: ratings,
+            questionRatings: ratings,
         }),
         error: null,
         loading: false,
@@ -95,26 +95,26 @@ const likeQuestionUndoFail = (state, action) => {
 };
 
 const dislikeQuestionSuccess = (state, action) => {
-    const ratings = state.user.QuestionRatings;
+    const ratings = state.user.questionRatings;
 
     if (ratings) {
         const i = ratings.findIndex(
-            (item) => item.QuestionID === action.questionID
+            (item) => item.questionId === action.questionId
         );
 
         if (i === -1) {
             ratings.push({
-                QuestionID: action.questionID,
-                IsLiked: false,
+                questionId: action.questionId,
+                isLiked: false,
             });
         } else {
-            ratings[i].IsLiked = false;
+            ratings[i].isLiked = false;
         }
     }
 
     return updateObject(state, {
         user: updateObject(state.user, {
-            QuestionRatings: ratings,
+            questionRatings: ratings,
         }),
         error: null,
         loading: false,
@@ -129,20 +129,18 @@ const dislikeQuestionFail = (state, action) => {
 };
 
 const dislikeQuestionUndoSuccess = (state, action) => {
-    var ratings = state.user.QuestionRatings;
-    console.log(ratings);
+    var ratings = state.user.questionRatings;
+
     if (ratings) {
         ratings = ratings.filter(
             (item) =>
-                item.QuestionID !== action.questionID && item.IsLiked !== false
+                item.questionId !== action.questionId && item.isLiked !== false
         );
-
-        console.log(ratings);
     }
 
     return updateObject(state, {
         user: updateObject(state.user, {
-            QuestionRatings: ratings,
+            questionRatings: ratings,
         }),
         error: null,
         loading: false,
@@ -166,9 +164,9 @@ const updateUserStart = (state, action) => {
 const updateUserSuccess = (state, action) => {
     return updateObject(state, {
         user: updateObject(state.user, {
-            FirstName: action.FirstName,
-            LastName: action.LastName,
-            Email: action.Email,
+            firstName: action.firstName,
+            lastName: action.lastName,
+            email: action.email,
         }),
         error: null,
         loading: false,
@@ -205,30 +203,30 @@ const changePasswordFail = (state, action) => {
 
 const addNotification = (state, action) => {
     const newNotifications = [
-        ...state.user.AnswerNotifications,
+        ...state.user.answerNotifications,
         action.notification,
     ];
 
     return updateObject(state, {
         user: updateObject(state.user, {
-            AnswerNotifications: newNotifications,
+            answerNotifications: newNotifications,
         }),
         loading: false,
     });
 };
 
 const likeAnswerSuccess = (state, action) => {
-    const ratings = state.user.QuestionRatings;
+    const ratings = state.user.questionRatings;
 
     if (ratings) {
         const i = ratings.findIndex(
-            (item) => item.QuestionID === action.questionID
+            (item) => item.questionId === action.questionId
         );
 
         if (i === -1) {
             ratings.push({
-                QuestionID: action.questionID,
-                IsLiked: true,
+                questionId: action.questionId,
+                isLiked: true,
             });
         } else {
             ratings[i].IsLiked = true;
@@ -237,7 +235,7 @@ const likeAnswerSuccess = (state, action) => {
 
     return updateObject(state, {
         user: updateObject(state.user, {
-            QuestionRatings: ratings,
+            questionRatings: ratings,
         }),
         error: null,
         loading: false,
@@ -252,17 +250,17 @@ const likeAnswerFail = (state, action) => {
 };
 
 const likeAnswerUndoSuccess = (state, action) => {
-    var ratings = state.user.AnswerRatings;
+    var ratings = state.user.answerRatings;
 
     if (ratings) {
         ratings = ratings.filter((item) => {
-            return item.AnswerID !== action.answerID && item.IsLiked !== true;
+            return item.answerId !== action.answerId && item.isLiked !== true;
         });
     }
 
     return updateObject(state, {
         user: updateObject(state.user, {
-            AnswerRatings: ratings,
+            answerRatings: ratings,
         }),
         error: null,
         loading: false,
@@ -277,26 +275,26 @@ const likeAnswerUndoFail = (state, action) => {
 };
 
 const dislikeAnswerSuccess = (state, action) => {
-    const ratings = state.user.AnswerRatings;
+    const ratings = state.user.answerRatings;
 
     if (ratings) {
         const i = ratings.findIndex(
-            (item) => item.AnswerID === action.answerID
+            (item) => item.answerId === action.answerId
         );
 
         if (i === -1) {
             ratings.push({
-                AnswerID: action.answerID,
-                IsLiked: false,
+                answerId: action.answerId,
+                isLiked: false,
             });
         } else {
-            ratings[i].IsLiked = false;
+            ratings[i].isLiked = false;
         }
     }
 
     return updateObject(state, {
         user: updateObject(state.user, {
-            AnswerRatings: ratings,
+            answerRatings: ratings,
         }),
         error: null,
         loading: false,
@@ -311,18 +309,18 @@ const dislikeAnswerFail = (state, action) => {
 };
 
 const dislikeAnswerUndoSuccess = (state, action) => {
-    var ratings = state.user.AnswerRatings;
+    var ratings = state.user.answerRatings;
 
     if (ratings) {
         ratings = ratings.filter(
             (item) =>
-                item.AnswerID !== action.answerID && item.IsLiked !== false
+                item.answerId !== action.answerId && item.isLiked !== false
         );
     }
 
     return updateObject(state, {
         user: updateObject(state.user, {
-            AnswerRatings: ratings,
+            answerRatings: ratings,
         }),
         error: null,
         loading: false,

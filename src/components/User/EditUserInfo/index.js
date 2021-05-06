@@ -44,9 +44,9 @@ const EditUserInfo = () => {
             {errorMessage}
             <Formik
                 initialValues={{
-                    firstName: data.user.FirstName,
-                    lastName: data.user.LastName,
-                    email: data.user.Email,
+                    firstName: data.user.firstName,
+                    lastName: data.user.lastName,
+                    email: data.user.email,
                 }}
                 validationSchema={infoSchema}
                 onSubmit={handleSubmit}

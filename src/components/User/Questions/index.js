@@ -13,11 +13,11 @@ import NewQuestion from "../../NewQuestion";
 const Questions = () => {
     const dispatch = useDispatch();
 
-    const userID = useSelector((state) => state.loggedInUser.user.ID);
+    const userId = useSelector((state) => state.loggedInUser.user.id);
 
     const onQuestionsFetch = useCallback(
-        (userID, pageNumber, pageSize) =>
-            dispatch(actions.fetchUsersQuestions(userID, pageNumber, pageSize)),
+        (userId, pageNumber, pageSize) =>
+            dispatch(actions.fetchUsersQuestions(userId, pageNumber, pageSize)),
         [dispatch]
     );
 
@@ -26,7 +26,7 @@ const Questions = () => {
 
     const getNext = () => {
         onQuestionsFetch(
-            userID,
+            userId,
             parseInt(data.pageNumber) + 1 || queryConstants.DEFAULT_PAGE_NUMBER,
             data.pageSize || queryConstants.DEFAULT_PAGE_SIZE
         );
@@ -34,11 +34,11 @@ const Questions = () => {
 
     useEffect(() => {
         onQuestionsFetch(
-            userID,
+            userId,
             queryConstants.DEFAULT_PAGE_NUMBER,
             queryConstants.DEFAULT_PAGE_SIZE
         );
-    }, [onQuestionsFetch, userID]);
+    }, [onQuestionsFetch, userId]);
 
     if (!data.questions) {
         return (
@@ -59,7 +59,7 @@ const Questions = () => {
             {data.questions.map((question) => {
                 return (
                     <QuestionListItem
-                        key={question.ID + new Date().getTime()}
+                        key={question.id + new Date().getTime()}
                         {...question}
                     />
                 );

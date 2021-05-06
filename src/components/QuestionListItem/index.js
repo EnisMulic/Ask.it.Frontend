@@ -12,68 +12,68 @@ import * as routeConstants from "../../constants/routes";
 import DeleteQuestion from "../DeleteQuestion";
 
 const QuestionListItem = (props) => {
-    const { ID, Content, Likes, Dislikes, User } = props;
-    const user = useSelector((state) => state.loggedInUser.user);
+    const { id, content, likes, dislikes, user } = props;
+    const loggedInUser = useSelector((state) => state.loggedInUser.user);
     const dispatch = useDispatch();
 
     const onLikeQuestion = useCallback(
-        (QuestionID) => dispatch(actions.likeQuestion(QuestionID)),
+        (questionId) => dispatch(actions.likeQuestion(questionId)),
         [dispatch]
     );
     const onLikeQuestionUndo = useCallback(
-        (QuestionID) => dispatch(actions.likeQuestionUndo(QuestionID)),
+        (questionId) => dispatch(actions.likeQuestionUndo(questionId)),
         [dispatch]
     );
 
     const onDislikeQuestion = useCallback(
-        (QuestionID) => dispatch(actions.dislikeQuestion(QuestionID)),
+        (questionId) => dispatch(actions.dislikeQuestion(questionId)),
         [dispatch]
     );
     const onDislikeQuestionUndo = useCallback(
-        (QuestionID) => dispatch(actions.dislikeQuestionUndo(QuestionID)),
+        (questionId) => dispatch(actions.dislikeQuestionUndo(questionId)),
         [dispatch]
     );
 
     var thumbsUp = <ThumbsUp size="21" />;
 
-    if (user !== null) {
+    if (loggedInUser !== null) {
         if (
-            user.QuestionRatings.find(
-                (item) => item.QuestionID === ID && item.IsLiked === true
+            loggedInUser.questionRatings.find(
+                (item) => item.questionId === id && item.isLiked === true
             )
         ) {
             thumbsUp = (
                 <ThumbsUp
                     size="21"
                     fill={"#828282"}
-                    onClick={() => onLikeQuestionUndo(ID)}
+                    onClick={() => onLikeQuestionUndo(id)}
                 />
             );
         } else {
             thumbsUp = (
-                <ThumbsUp size="21" onClick={() => onLikeQuestion(ID)} />
+                <ThumbsUp size="21" onClick={() => onLikeQuestion(id)} />
             );
         }
     }
 
     var thumbsDown = <ThumbsDown size="21" />;
 
-    if (user !== null) {
+    if (loggedInUser !== null) {
         if (
-            user.QuestionRatings.find(
-                (item) => item.QuestionID === ID && item.IsLiked === false
+            loggedInUser.questionRatings.find(
+                (item) => item.questionId === id && item.isLiked === false
             )
         ) {
             thumbsDown = (
                 <ThumbsDown
                     size="21"
                     fill={"#828282"}
-                    onClick={() => onDislikeQuestionUndo(ID)}
+                    onClick={() => onDislikeQuestionUndo(id)}
                 />
             );
         } else {
             thumbsDown = (
-                <ThumbsDown size="21" onClick={() => onDislikeQuestion(ID)} />
+                <ThumbsDown size="21" onClick={() => onDislikeQuestion(id)} />
             );
         }
     }
@@ -82,23 +82,23 @@ const QuestionListItem = (props) => {
         <div className={style.Question}>
             <div className={style.Actions}>
                 <div className={style.Spacer} />
-                {user && user.ID === User.ID ? (
-                    <DeleteQuestion id={ID} />
+                {loggedInUser && loggedInUser.id === user.id ? (
+                    <DeleteQuestion id={id} />
                 ) : null}
             </div>
-            <Link to={routeConstants.QUESTION_DETAILS_ROUTE.replace(":id", ID)}>
+            <Link to={routeConstants.QUESTION_DETAILS_ROUTE.replace(":id", id)}>
                 <div className={style.Content}>
-                    <div>{parse(Content)}</div>
+                    <div>{parse(content)}</div>
                 </div>
             </Link>
             <div className={style.Info}>
                 <div className={style.Wrapper}>
                     {thumbsUp}
-                    <span className={style.Number}>{Likes}</span>
+                    <span className={style.Number}>{likes}</span>
                 </div>
                 <div className={style.Wrapper}>
                     {thumbsDown}
-                    <span className={style.Number}>{Dislikes}</span>
+                    <span className={style.Number}>{dislikes}</span>
                 </div>
             </div>
         </div>

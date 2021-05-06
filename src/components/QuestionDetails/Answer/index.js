@@ -18,20 +18,20 @@ const Answer = (props) => {
     const dispatch = useDispatch();
 
     const onLikeAnswer = useCallback(
-        (AnswerID) => dispatch(actions.likeAnswer(AnswerID)),
+        (answerId) => dispatch(actions.likeAnswer(answerId)),
         [dispatch]
     );
     const onLikeAnswerUndo = useCallback(
-        (AnswerID) => dispatch(actions.likeAnswerUndo(AnswerID)),
+        (answerId) => dispatch(actions.likeAnswerUndo(answerId)),
         [dispatch]
     );
 
     const onDislikeAnswer = useCallback(
-        (AnswerID) => dispatch(actions.dislikeAnswer(AnswerID)),
+        (answerId) => dispatch(actions.dislikeAnswer(answerId)),
         [dispatch]
     );
     const onDislikeAnswerUndo = useCallback(
-        (AnswerID) => dispatch(actions.dislikeAnswerUndo(AnswerID)),
+        (answerId) => dispatch(actions.dislikeAnswerUndo(answerId)),
         [dispatch]
     );
 
@@ -41,7 +41,7 @@ const Answer = (props) => {
         if (
             user.AnswerRatings &&
             user.AnswerRatings.find(
-                (item) => item.AnswerID === ID && item.IsLiked === true
+                (item) => item.answerId === ID && item.isLiked === true
             )
         ) {
             thumbsUp = (
@@ -62,7 +62,7 @@ const Answer = (props) => {
         if (
             user.AnswerRatings &&
             user.AnswerRatings.find(
-                (item) => item.AnswerID === ID && item.IsLiked === false
+                (item) => item.answerId === ID && item.isLiked === false
             )
         ) {
             thumbsDown = (

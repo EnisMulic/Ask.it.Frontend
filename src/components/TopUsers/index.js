@@ -52,7 +52,7 @@ const TopUsers = () => {
             {data.users.map((user) => {
                 return (
                     <UserListItem
-                        key={user.ID + new Date().getTime()}
+                        key={user.id + new Date().getTime()}
                         {...user}
                     />
                 );

@@ -34,7 +34,7 @@ export const fetchLoggedInUser = () => {
 
         http.get(endpointConstants.GET_ME_ENDPOINT)
             .then((response) => {
-                dispatch(fetchLoggedInUserSuccess(response.data.Data));
+                dispatch(fetchLoggedInUserSuccess(response.data.data));
             })
             .catch((err) => {
                 dispatch(fetchLoggedInUserFail(err));
@@ -42,10 +42,10 @@ export const fetchLoggedInUser = () => {
     };
 };
 
-export const likeQuestionSuccess = (questionID) => {
+export const likeQuestionSuccess = (questionId) => {
     return {
         type: actionTypes.LIKE_QUESTION_SUCCESS,
-        questionID: questionID,
+        questionId: questionId,
     };
 };
 
@@ -56,13 +56,13 @@ export const likeQuestionFail = (error) => {
     };
 };
 
-export const likeQuestion = (questionID) => {
+export const likeQuestion = (questionId) => {
     return (dispatch) => {
         http.post(
-            endpointConstants.LIKE_QUESTION_ENDPOINT.replace("{id}", questionID)
+            endpointConstants.LIKE_QUESTION_ENDPOINT.replace("{id}", questionId)
         )
             .then(() => {
-                dispatch(likeQuestionSuccess(questionID));
+                dispatch(likeQuestionSuccess(questionId));
             })
             .catch((err) => {
                 dispatch(likeQuestionFail(err));
@@ -70,10 +70,10 @@ export const likeQuestion = (questionID) => {
     };
 };
 
-export const likeQuestionUndoSuccess = (questionID) => {
+export const likeQuestionUndoSuccess = (questionId) => {
     return {
         type: actionTypes.LIKE_QUESTION_UNDO_SUCCESS,
-        questionID: questionID,
+        questionId: questionId,
     };
 };
 
@@ -84,16 +84,16 @@ export const likeQuestionUndoFail = (error) => {
     };
 };
 
-export const likeQuestionUndo = (questionID) => {
+export const likeQuestionUndo = (questionId) => {
     return (dispatch) => {
         http.post(
             endpointConstants.LIKE_QUESTION_UNDO_ENDPOINT.replace(
                 "{id}",
-                questionID
+                questionId
             )
         )
             .then(() => {
-                dispatch(likeQuestionUndoSuccess(questionID));
+                dispatch(likeQuestionUndoSuccess(questionId));
             })
             .catch((err) => {
                 dispatch(likeQuestionUndoFail(err));
@@ -101,10 +101,10 @@ export const likeQuestionUndo = (questionID) => {
     };
 };
 
-export const dislikeQuestionSuccess = (questionID) => {
+export const dislikeQuestionSuccess = (questionId) => {
     return {
         type: actionTypes.DISLIKE_QUESTION_SUCCESS,
-        questionID: questionID,
+        questionId: questionId,
     };
 };
 
@@ -115,16 +115,16 @@ export const dislikeQuestionFail = (error) => {
     };
 };
 
-export const dislikeQuestion = (questionID) => {
+export const dislikeQuestion = (questionId) => {
     return (dispatch) => {
         http.post(
             endpointConstants.DISLIKE_QUESTION_ENDPOINT.replace(
                 "{id}",
-                questionID
+                questionId
             )
         )
             .then(() => {
-                dispatch(dislikeQuestionSuccess(questionID));
+                dispatch(dislikeQuestionSuccess(questionId));
             })
             .catch((err) => {
                 dispatch(dislikeQuestionFail(err));
@@ -132,10 +132,10 @@ export const dislikeQuestion = (questionID) => {
     };
 };
 
-export const dislikeQuestionUndoSuccess = (questionID) => {
+export const dislikeQuestionUndoSuccess = (questionId) => {
     return {
         type: actionTypes.DISLIKE_QUESTION_UNDO_SUCCESS,
-        questionID: questionID,
+        questionId: questionId,
     };
 };
 
@@ -146,16 +146,16 @@ export const dislikeQuestionUndoFail = (error) => {
     };
 };
 
-export const dislikeQuestionUndo = (questionID) => {
+export const dislikeQuestionUndo = (questionId) => {
     return (dispatch) => {
         http.post(
             endpointConstants.DISLIKE_QUESTION_UNDO_ENDPOINT.replace(
                 "{id}",
-                questionID
+                questionId
             )
         )
             .then(() => {
-                dispatch(dislikeQuestionUndoSuccess(questionID));
+                dispatch(dislikeQuestionUndoSuccess(questionId));
             })
             .catch((err) => {
                 dispatch(dislikeQuestionUndoFail(err));
@@ -169,12 +169,12 @@ export const updateUserStart = () => {
     };
 };
 
-export const updateUserSuccess = (FirstName, LastName, Email) => {
+export const updateUserSuccess = (firstName, lastName, email) => {
     return {
         type: actionTypes.UPDATE_USER_SUCCESS,
-        FirstName: FirstName,
-        LastName: LastName,
-        Email: Email,
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
     };
 };
 
@@ -197,8 +197,8 @@ export const updateUser = (firstName, lastName, email) => {
 
         http.post(endpointConstants.UPDATE_USER_ENDPOINT, authData)
             .then((response) => {
-                const { FirstName, LastName, Email } = response.data.Data;
-                dispatch(updateUserSuccess(FirstName, LastName, Email));
+                const { firstName, lastName, email } = response.data.data;
+                dispatch(updateUserSuccess(firstName, lastName, email));
             })
             .catch((err) => {
                 dispatch(updateUserFail(err));
@@ -251,10 +251,10 @@ export const addNotification = (notification) => {
     };
 };
 
-export const likeAnswerSuccess = (answerID) => {
+export const likeAnswerSuccess = (answerId) => {
     return {
         type: actionTypes.LIKE_ANSWER_SUCCESS,
-        answerID: answerID,
+        answerId: answerId,
     };
 };
 
@@ -265,13 +265,13 @@ export const likeAnswerFail = (error) => {
     };
 };
 
-export const likeAnswer = (answerID) => {
+export const likeAnswer = (answerId) => {
     return (dispatch) => {
         http.post(
-            endpointConstants.LIKE_ANSWER_ENDPOINT.replace("{id}", answerID)
+            endpointConstants.LIKE_ANSWER_ENDPOINT.replace("{id}", answerId)
         )
             .then(() => {
-                dispatch(likeAnswerSuccess(answerID));
+                dispatch(likeAnswerSuccess(answerId));
             })
             .catch((err) => {
                 dispatch(likeAnswerFail(err));
@@ -279,10 +279,10 @@ export const likeAnswer = (answerID) => {
     };
 };
 
-export const likeAnswerUndoSuccess = (answerID) => {
+export const likeAnswerUndoSuccess = (answerId) => {
     return {
         type: actionTypes.LIKE_ANSWER_UNDO_SUCCESS,
-        answerID: answerID,
+        answerId: answerId,
     };
 };
 
@@ -293,16 +293,16 @@ export const likeAnswerUndoFail = (error) => {
     };
 };
 
-export const likeAnswerUndo = (answerID) => {
+export const likeAnswerUndo = (answerId) => {
     return (dispatch) => {
         http.post(
             endpointConstants.LIKE_ANSWER_UNDO_ENDPOINT.replace(
                 "{id}",
-                answerID
+                answerId
             )
         )
             .then(() => {
-                dispatch(likeAnswerUndoSuccess(answerID));
+                dispatch(likeAnswerUndoSuccess(answerId));
             })
             .catch((err) => {
                 dispatch(likeAnswerUndoFail(err));
@@ -310,10 +310,10 @@ export const likeAnswerUndo = (answerID) => {
     };
 };
 
-export const dislikeAnswerSuccess = (answerID) => {
+export const dislikeAnswerSuccess = (answerId) => {
     return {
         type: actionTypes.DISLIKE_ANSWER_SUCCESS,
-        answerID: answerID,
+        answerId: answerId,
     };
 };
 
@@ -324,13 +324,13 @@ export const dislikeAnswerFail = (error) => {
     };
 };
 
-export const dislikeAnswer = (answerID) => {
+export const dislikeAnswer = (answerId) => {
     return (dispatch) => {
         http.post(
-            endpointConstants.DISLIKE_ANSWER_ENDPOINT.replace("{id}", answerID)
+            endpointConstants.DISLIKE_ANSWER_ENDPOINT.replace("{id}", answerId)
         )
             .then(() => {
-                dispatch(dislikeAnswerSuccess(answerID));
+                dispatch(dislikeAnswerSuccess(answerId));
             })
             .catch((err) => {
                 dispatch(dislikeAnswerFail(err));
@@ -338,10 +338,10 @@ export const dislikeAnswer = (answerID) => {
     };
 };
 
-export const dislikeAnswerUndoSuccess = (answerID) => {
+export const dislikeAnswerUndoSuccess = (answerId) => {
     return {
         type: actionTypes.DISLIKE_ANSWER_UNDO_SUCCESS,
-        answerID: answerID,
+        answerId: answerId,
     };
 };
 
@@ -352,16 +352,16 @@ export const dislikeAnswerUndoFail = (error) => {
     };
 };
 
-export const dislikeAnswerUndo = (answerID) => {
+export const dislikeAnswerUndo = (answerId) => {
     return (dispatch) => {
         http.post(
             endpointConstants.DISLIKE_ANSWER_UNDO_ENDPOINT.replace(
                 "{id}",
-                answerID
+                answerId
             )
         )
             .then(() => {
-                dispatch(dislikeAnswerUndoSuccess(answerID));
+                dispatch(dislikeAnswerUndoSuccess(answerId));
             })
             .catch((err) => {
                 dispatch(dislikeAnswerUndoFail(err));

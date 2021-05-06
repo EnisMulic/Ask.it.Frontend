@@ -24,19 +24,19 @@ const fetchTopUsersSuccess = (state, action) => {
     var users = [...state.users];
 
     if (action.payload.PageNumber !== state.pageNumber) {
-        users = [...users, ...action.payload.Data];
+        users = [...users, ...action.payload.data];
     } else {
         users = [...action.payload.Data];
     }
 
     return updateObject(state, {
         users: users,
-        pageNumber: action.payload.PageNumber,
-        pageSize: action.payload.PageSize,
-        nextPage: action.payload.NextPage,
-        previousPage: action.payload.PreviousPage,
-        firstPage: action.payload.FirstPage,
-        lastPage: action.payload.LastPage,
+        pageNumber: action.payload.pageNumber,
+        pageSize: action.payload.pageSize,
+        nextPage: action.payload.nextPage,
+        previousPage: action.payload.previousPage,
+        firstPage: action.payload.firstPage,
+        lastPage: action.payload.lastPage,
         error: null,
         loading: false,
     });

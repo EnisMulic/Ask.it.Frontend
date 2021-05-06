@@ -20,8 +20,7 @@ const QuestionDetails = (props) => {
             endpointConstants.GET_QUESTION_BY_ID_ENDPOINT.replace("{id}", id)
         )
             .then((response) => {
-                console.log(response.data.Data);
-                setQuestion(response.data.Data);
+                setQuestion(response.data.data);
             })
             .catch((err) => console.log(err));
         return () => {
@@ -36,12 +35,12 @@ const QuestionDetails = (props) => {
                     <div className={style.Question}>
                         <QuestionListItem {...question} />
                         <CreateAnswer questionId={id} />
-                        {question.Answers &&
-                            question.Answers.map((answer) => {
+                        {question.answers &&
+                            question.answers.map((answer) => {
                                 return (
                                     <Answer
                                         {...answer}
-                                        key={new Date().getTime() + answer.ID}
+                                        key={new Date().getTime() + answer.id}
                                     />
                                 );
                             })}

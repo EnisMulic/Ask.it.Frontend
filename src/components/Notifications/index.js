@@ -5,6 +5,8 @@ import * as actions from "../../store/actions";
 import { Bell } from "react-feather";
 import { connect } from "../../websocket";
 
+import * as routeConstants from "../../constants/routes";
+
 import style from "./Notifications.module.css";
 
 const Notifications = () => {
@@ -14,7 +16,7 @@ const Notifications = () => {
     var notifications = [];
 
     if (loggedInUser) {
-        notifications = loggedInUser.AnswerNotifications;
+        notifications = loggedInUser.answerNotifications;
     }
 
     const addNotification = useCallback(
@@ -45,8 +47,15 @@ const Notifications = () => {
         >
             {notifications.map((notification) => {
                 return (
-                    <NavDropdown.Item href="#" key={notification.ID}>
-                        {notification.Content}
+                    <NavDropdown.Item
+                        href={routeConstants.QUESTION_DETAILS_ROUTE.replace(
+                            ":id",
+                            notification.questionId
+                        )}
+                        key={notification.id}
+                        className={style.DropdownItem}
+                    >
+                        {notification.content}
                     </NavDropdown.Item>
                 );
             })}

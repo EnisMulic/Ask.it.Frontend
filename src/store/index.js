@@ -1,6 +1,4 @@
-import { createStore, applyMiddleware, combineReducers } from "redux";
-import { persistStore, persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage";
+import { createStore, applyMiddleware, combineReducers, compose } from "redux";
 import thunk from "redux-thunk";
 
 import authReducer from "./reducers/auth";
@@ -9,6 +7,8 @@ import latestQuestionsReducer from "./reducers/latestQuestions";
 import hotQuestionsReducer from "./reducers/hotQuestions";
 import topUsersReducer from "./reducers/topUsers";
 import usersQuestionsReducer from "./reducers/usersQuestions";
+
+import { saveState, loadState } from "./localStorage";
 
 const rootReducer = combineReducers({
     auth: authReducer,
@@ -19,8 +19,26 @@ const rootReducer = combineReducers({
     usersQuestions: usersQuestionsReducer,
 });
 
-const store = createStore(rootReducer, applyMiddleware(thunk));
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-let persistor = persistStore(store);
+const initialState = {
+    user: null,
+    error: null,
+    loading: false,
+};
 
-export { store, persistor };
+const persistedState = loadState(initialState);
+
+const store = createStore(
+    rootReducer,
+    persistedState,
+    composeEnhancers(applyMiddleware(thunk))
+);
+
+store.subscribe(() => {
+    saveState({
+        loggedInUser: store.getState().loggedInUser,
+    });
+});
+
+export { store };

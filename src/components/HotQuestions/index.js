@@ -53,7 +53,12 @@ const HotQuestions = () => {
         <div className={style.HotQuestions}>
             {auth.token && <NewQuestion />}
             {data.questions.map((question) => {
-                return <QuestionListItem key={question.ID} {...question} />;
+                return (
+                    <QuestionListItem
+                        key={question.id + new Date().getTime()}
+                        {...question}
+                    />
+                );
             })}
             {data.nextPage && (
                 <Button variant="dark" onClick={() => getNext()}>
