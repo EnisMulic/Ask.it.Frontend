@@ -5,7 +5,7 @@ import Button from "react-bootstrap/Button";
 
 import * as actions from "../../store/actions";
 import * as queryConstants from "../../constants/query";
-import UserListItem from "../UserListItem";
+import UserListItem from "../../components/UserListItem";
 
 import style from "./TopUsers.module.css";
 

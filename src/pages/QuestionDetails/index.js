@@ -4,10 +4,10 @@ import Loader from "react-loader-spinner";
 
 import http from "../../http";
 import * as endpointConstants from "../../constants/endpoints";
-import QuestionListItem from "../QuestionListItem";
-import Answer from "./Answer";
+import QuestionListItem from "../../components/QuestionListItem";
+import Answer from "../../components/Answer";
 
-import CreateAnswer from "../CreateAnswer";
+import CreateAnswer from "../../components/CreateAnswer";
 
 import style from "./QuestionDetails.module.css";
 

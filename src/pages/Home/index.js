@@ -5,21 +5,21 @@ import Button from "react-bootstrap/Button";
 
 import * as actions from "../../store/actions";
 import * as queryConstants from "../../constants/query";
-import QuestionListItem from "../QuestionListItem";
+import QuestionListItem from "../../components/QuestionListItem";
 
-import style from "./HotQuestions.module.css";
-import NewQuestion from "../NewQuestion";
+import style from "./Home.module.css";
+import NewQuestion from "../../components/NewQuestion";
 
-const HotQuestions = () => {
+const Home = () => {
     const dispatch = useDispatch();
 
     const onQuestionsFetch = useCallback(
         (pageNumber, pageSize) =>
-            dispatch(actions.fetchHotQuestions(pageNumber, pageSize)),
+            dispatch(actions.fetchLatestQuestions(pageNumber, pageSize)),
         [dispatch]
     );
 
-    const data = useSelector((state) => state.hotQuestions);
+    const data = useSelector((state) => state.latestQuestions);
     const auth = useSelector((state) => state.auth);
 
     const getNext = () => {
@@ -50,7 +50,7 @@ const HotQuestions = () => {
     }
 
     return (
-        <div className={style.HotQuestions}>
+        <div className={style.Home}>
             {auth.token && <NewQuestion />}
             {data.questions.map((question) => {
                 return (
@@ -69,4 +69,4 @@ const HotQuestions = () => {
     );
 };
 
-export default HotQuestions;
+export default Home;

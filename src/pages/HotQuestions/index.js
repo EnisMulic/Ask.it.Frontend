@@ -3,30 +3,27 @@ import { useDispatch, useSelector } from "react-redux";
 import Loader from "react-loader-spinner";
 import Button from "react-bootstrap/Button";
 
-import * as actions from "../../../store/actions";
-import * as queryConstants from "../../../constants/query";
-import QuestionListItem from "../../QuestionListItem";
+import * as actions from "../../store/actions";
+import * as queryConstants from "../../constants/query";
+import QuestionListItem from "../../components/QuestionListItem";
 
-import style from "./Questions.module.css";
-import NewQuestion from "../../NewQuestion";
+import style from "./HotQuestions.module.css";
+import NewQuestion from "../../components/NewQuestion";
 
-const Questions = () => {
+const HotQuestions = () => {
     const dispatch = useDispatch();
 
-    const userId = useSelector((state) => state.loggedInUser.user.id);
-
     const onQuestionsFetch = useCallback(
-        (userId, pageNumber, pageSize) =>
-            dispatch(actions.fetchUsersQuestions(userId, pageNumber, pageSize)),
+        (pageNumber, pageSize) =>
+            dispatch(actions.fetchHotQuestions(pageNumber, pageSize)),
         [dispatch]
     );
 
-    const data = useSelector((state) => state.usersQuestions);
+    const data = useSelector((state) => state.hotQuestions);
     const auth = useSelector((state) => state.auth);
 
     const getNext = () => {
         onQuestionsFetch(
-            userId,
             parseInt(data.pageNumber) + 1 || queryConstants.DEFAULT_PAGE_NUMBER,
             data.pageSize || queryConstants.DEFAULT_PAGE_SIZE
         );
@@ -34,11 +31,10 @@ const Questions = () => {
 
     useEffect(() => {
         onQuestionsFetch(
-            userId,
             queryConstants.DEFAULT_PAGE_NUMBER,
             queryConstants.DEFAULT_PAGE_SIZE
         );
-    }, [onQuestionsFetch, userId]);
+    }, [onQuestionsFetch]);
 
     if (!data.questions) {
         return (
@@ -54,7 +50,7 @@ const Questions = () => {
     }
 
     return (
-        <div className={style.Questions}>
+        <div className={style.HotQuestions}>
             {auth.token && <NewQuestion />}
             {data.questions.map((question) => {
                 return (
@@ -73,4 +69,4 @@ const Questions = () => {
     );
 };
 
-export default Questions;
+export default HotQuestions;

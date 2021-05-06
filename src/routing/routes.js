@@ -1,14 +1,14 @@
 import * as routeConsts from "../constants/routes";
 
-import Home from "../components/Home";
-import Login from "../components/Auth/Login";
-import Register from "../components/Auth/Register";
-import HotQuestions from "../components/HotQuestions";
-import TopUsers from "../components/TopUsers";
-import ChangePassword from "../components/User/ChangePassword";
-import Questions from "../components/User/Questions";
-import EditUserInfo from "../components/User/EditUserInfo";
-import QuestionDetails from "../components/QuestionDetails";
+import Home from "../pages/Home";
+import Login from "../pages/Login";
+import Register from "../pages//Register";
+import HotQuestions from "../pages/HotQuestions";
+import TopUsers from "../pages/TopUsers";
+import ChangePassword from "../pages/ChangePassword";
+import YourQuestions from "../pages/YourQuestions";
+import EditUserInfo from "../pages/EditUserInfo";
+import QuestionDetails from "../pages/QuestionDetails";
 
 const LOGGED_IN_ROUTES = [
     {
@@ -34,7 +34,7 @@ const LOGGED_IN_ROUTES = [
     {
         path: routeConsts.YOUR_QUESTIONS_ROUTE,
         exact: true,
-        component: Questions,
+        component: YourQuestions,
     },
     {
         path: routeConsts.EDIT_USER_INFO_ROUTE,

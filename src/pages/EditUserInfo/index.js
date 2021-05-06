@@ -4,11 +4,11 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import Button from "react-bootstrap/Button";
 
-import * as actions from "../../../store/actions";
+import * as actions from "../../store/actions";
 
 import style from "./EditUserInfo.module.css";
 
-import * as authConstants from "../../../constants/auth";
+import * as authConstants from "../../constants/auth";
 
 const infoSchema = Yup.object().shape({
     email: Yup.string()

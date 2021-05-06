@@ -3,11 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { ThumbsUp, ThumbsDown, User, Edit } from "react-feather";
 import parse from "html-react-parser";
 
-import * as actions from "../../../store/actions";
+import * as actions from "../../store/actions";
 
 import style from "./Answer.module.css";
-import DeleteAnswer from "../../DeleteAnswer";
-import EditAnswer from "../../EditAnswer";
+import DeleteAnswer from "../DeleteAnswer";
+import EditAnswer from "../EditAnswer";
 
 const Answer = (props) => {
     const { ID, Content, Likes, Dislikes, CreatedAt } = props;

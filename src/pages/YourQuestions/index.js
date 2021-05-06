@@ -5,25 +5,28 @@ import Button from "react-bootstrap/Button";
 
 import * as actions from "../../store/actions";
 import * as queryConstants from "../../constants/query";
-import QuestionListItem from "../QuestionListItem";
+import QuestionListItem from "../../components/QuestionListItem";
 
-import style from "./Home.module.css";
-import NewQuestion from "../NewQuestion";
+import style from "./YourQuestions.module.css";
+import NewQuestion from "../../components/NewQuestion";
 
-const Home = () => {
+const YourQuestions = () => {
     const dispatch = useDispatch();
 
+    const userId = useSelector((state) => state.loggedInUser.user.id);
+
     const onQuestionsFetch = useCallback(
-        (pageNumber, pageSize) =>
-            dispatch(actions.fetchLatestQuestions(pageNumber, pageSize)),
+        (userId, pageNumber, pageSize) =>
+            dispatch(actions.fetchUsersQuestions(userId, pageNumber, pageSize)),
         [dispatch]
     );
 
-    const data = useSelector((state) => state.latestQuestions);
+    const data = useSelector((state) => state.usersQuestions);
     const auth = useSelector((state) => state.auth);
 
     const getNext = () => {
         onQuestionsFetch(
+            userId,
             parseInt(data.pageNumber) + 1 || queryConstants.DEFAULT_PAGE_NUMBER,
             data.pageSize || queryConstants.DEFAULT_PAGE_SIZE
         );
@@ -31,10 +34,11 @@ const Home = () => {
 
     useEffect(() => {
         onQuestionsFetch(
+            userId,
             queryConstants.DEFAULT_PAGE_NUMBER,
             queryConstants.DEFAULT_PAGE_SIZE
         );
-    }, [onQuestionsFetch]);
+    }, [onQuestionsFetch, userId]);
 
     if (!data.questions) {
         return (
@@ -50,7 +54,7 @@ const Home = () => {
     }
 
     return (
-        <div className={style.Home}>
+        <div className={style.Questions}>
             {auth.token && <NewQuestion />}
             {data.questions.map((question) => {
                 return (
@@ -69,4 +73,4 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default YourQuestions;
