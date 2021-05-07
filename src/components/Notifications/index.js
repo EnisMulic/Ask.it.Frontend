@@ -12,7 +12,7 @@ import style from "./Notifications.module.css";
 const Notifications = () => {
     const dispatch = useDispatch();
 
-    const loggedInUser = useSelector((state) => state.loggedInUser.user);
+    const loggedInUser = useSelector((state) => state.user.me);
     var notifications = [];
 
     if (loggedInUser) {

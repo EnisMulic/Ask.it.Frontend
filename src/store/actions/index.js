@@ -1,21 +1,4 @@
 export {
-    authStart,
-    authSuccess,
-    authFail,
-    login,
-    register,
-    logout,
-    forceLogout,
-    checkAuthTimeout,
-    setAuthRedirectPath,
-    authCheckState,
-} from "./auth";
-export {
-    fetchLoggedInUser,
-    fetchLoggedInUserStart,
-    fetchLoggedInUserSuccess,
-    fetchLoggedInUserFail,
-    fetchLoggedInUserReset,
     likeQuestion,
     likeQuestionSuccess,
     likeQuestionFail,

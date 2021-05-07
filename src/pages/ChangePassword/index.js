@@ -38,7 +38,7 @@ const ChangePassword = () => {
         [dispatch]
     );
 
-    const data = useSelector((state) => state.loggedInUser);
+    const data = useSelector((state) => state.user);
 
     let errorMessage = null;
     if (data.error) {

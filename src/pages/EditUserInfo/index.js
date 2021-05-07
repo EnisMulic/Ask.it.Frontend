@@ -25,7 +25,7 @@ const EditUserInfo = () => {
         [dispatch]
     );
 
-    const data = useSelector((state) => state.loggedInUser);
+    const data = useSelector((state) => state.user);
 
     let errorMessage = null;
     if (data.error) {
@@ -44,9 +44,9 @@ const EditUserInfo = () => {
             {errorMessage}
             <Formik
                 initialValues={{
-                    firstName: data.user.firstName,
-                    lastName: data.user.lastName,
-                    email: data.user.email,
+                    firstName: data.me.firstName,
+                    lastName: data.me.lastName,
+                    email: data.me.email,
                 }}
                 validationSchema={infoSchema}
                 onSubmit={handleSubmit}

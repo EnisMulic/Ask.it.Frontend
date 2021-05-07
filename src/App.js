@@ -2,7 +2,7 @@ import React, { useEffect, useCallback } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import * as actions from "./store/actions";
+import * as actions from "./store/user/auth";
 import { LOGGED_IN_ROUTES, LOGGED_OUT_ROUTES } from "./routing/routes";
 import Navbar from "./components/Navbar";
 
@@ -20,7 +20,7 @@ const App = () => {
 
     const defaultLayoutPaths = LOGGED_IN_ROUTES.map((item) => item.path);
 
-    const auth = useSelector((state) => state.auth);
+    const auth = useSelector((state) => state.user);
 
     const routes = (auth.token !== null && (
         <Switch>

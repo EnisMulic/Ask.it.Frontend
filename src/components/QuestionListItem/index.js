@@ -13,7 +13,7 @@ import DeleteQuestion from "../DeleteQuestion";
 
 const QuestionListItem = (props) => {
     const { id, content, likes, dislikes, user } = props;
-    const loggedInUser = useSelector((state) => state.loggedInUser.user);
+    const loggedInUser = useSelector((state) => state.user.me);
     const dispatch = useDispatch();
 
     const onLikeQuestion = useCallback(

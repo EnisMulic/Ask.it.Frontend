@@ -19,7 +19,7 @@ const Home = () => {
     );
 
     const data = useSelector((state) => state.questions);
-    const auth = useSelector((state) => state.auth);
+    const auth = useSelector((state) => state.user);
 
     const getNext = () => {
         onQuestionsFetch(

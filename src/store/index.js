@@ -1,8 +1,7 @@
 import { createStore, applyMiddleware, combineReducers, compose } from "redux";
 import thunk from "redux-thunk";
 
-import authReducer from "./reducers/auth";
-import loggedInUserReducer from "./reducers/loggedInUser";
+import user from "./user/reducer";
 import topUsersReducer from "./reducers/topUsers";
 import questions from "./questions/reducer";
 
@@ -10,8 +9,7 @@ import { saveState, loadState } from "./localStorage";
 
 const rootReducer = combineReducers({
     questions,
-    auth: authReducer,
-    loggedInUser: loggedInUserReducer,
+    user,
     topUsers: topUsersReducer,
 });
 

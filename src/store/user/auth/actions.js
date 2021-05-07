@@ -1,62 +1,69 @@
 import jwt_decode from "jwt-decode";
 
-import * as actionTypes from "./actionTypes";
-import http from "../../http";
-import * as routeConstants from "../../constants/routes";
-import * as endpointConstants from "../../constants/endpoints";
-import * as authConstants from "../../constants/auth";
-import { fetchLoggedInUser, fetchLoggedInUserReset } from "./loggedInUser";
+import http from "../../../http";
+import * as routeConstants from "../../../constants/routes";
+import * as endpointConstants from "../../../constants/endpoints";
+import * as authConstants from "../../../constants/auth";
+import { fetchMe, fetchMeActionReset } from "../me";
 
-export const authStart = () => {
+export const AUTH_START = "AUTH_START";
+export const AUTH_SUCCESS = "AUTH_SUCCESS";
+export const AUTH_FAIL = "AUTH_FAIL";
+
+export const LOGOUT = "LOGOUT";
+
+export const SET_AUTH_REDIRECT_PATH = "SET_AUTH_REDIRECT_PATH";
+
+export const authActionStart = () => {
     return {
-        type: actionTypes.AUTH_START,
+        type: AUTH_START,
     };
 };
 
-export const authSuccess = (token, refreshToken) => {
+export const authActionSuccess = (token, refreshToken) => {
     return {
-        type: actionTypes.AUTH_SUCCESS,
+        type: AUTH_SUCCESS,
         token: token,
         refreshToken: refreshToken,
     };
 };
 
-export const authFail = (error) => {
+export const authActionFail = (error) => {
     return {
-        type: actionTypes.AUTH_FAIL,
+        type: AUTH_FAIL,
         error: error,
     };
 };
 
-export const logout = () => {
+export const logoutAction = () => {
     localStorage.removeItem(authConstants.TOKEN);
     localStorage.removeItem(authConstants.EXPIRATION_TIME);
     localStorage.removeItem(authConstants.REFRESH_TOKEN);
     localStorage.removeItem(authConstants.USER_ID);
     return {
-        type: actionTypes.LOGOUT,
+        type: LOGOUT,
     };
 };
 
 export const forceLogout = () => {
     return (dispatch) => {
-        dispatch(logout());
-        dispatch(fetchLoggedInUserReset());
+        dispatch(logoutAction());
+        dispatch(fetchMeActionReset());
     };
 };
 
 export const checkAuthTimeout = (expirationTime) => {
     return (dispatch) => {
         setTimeout(() => {
-            dispatch(logout());
-            dispatch(fetchLoggedInUserReset());
+            dispatch(logoutAction());
+            dispatch(fetchMeActionReset());
         }, expirationTime * 1000);
     };
 };
 
-export const setAuthRedirectPath = (path) => {
+export const setAuthRedirectPathAction = (path) => {
     return {
-        type: actionTypes.SET_AUTH_REDIRECT_PATH,
+        type: SET_AUTH_REDIRECT_PATH,
         path: path,
     };
 };
@@ -75,8 +82,8 @@ const processToken = (dispatch, data) => {
     localStorage.setItem(authConstants.EXPIRATION_TIME, expirationDate);
     localStorage.setItem(authConstants.USER_ID, decoded.sub);
 
-    dispatch(authSuccess(token, refreshToken));
-    dispatch(setAuthRedirectPath(routeConstants.HOME_ROUTE));
+    dispatch(authActionSuccess(token, refreshToken));
+    dispatch(setAuthRedirectPathAction(routeConstants.HOME_ROUTE));
     dispatch(
         checkAuthTimeout(
             (expirationDate.getTime() - new Date().getTime()) / 1000
@@ -86,7 +93,7 @@ const processToken = (dispatch, data) => {
 
 export const register = (email, password, firstName, lastName) => {
     return (dispatch) => {
-        dispatch(authStart());
+        dispatch(authActionStart());
         const authData = {
             email: email,
             password: password,
@@ -97,17 +104,17 @@ export const register = (email, password, firstName, lastName) => {
         http.post(endpointConstants.REGISTER_ENDPOINT, authData)
             .then((response) => {
                 processToken(dispatch, response.data.data);
-                dispatch(fetchLoggedInUser());
+                dispatch(fetchMe());
             })
             .catch((err) => {
-                dispatch(authFail(err));
+                dispatch(authActionFail(err));
             });
     };
 };
 
 export const login = (email, password) => {
     return (dispatch) => {
-        dispatch(authStart());
+        dispatch(authActionStart());
         const authData = {
             email: email,
             password: password,
@@ -116,10 +123,10 @@ export const login = (email, password) => {
         http.post(endpointConstants.LOGIN_ENDPOINT, authData)
             .then((response) => {
                 processToken(dispatch, response.data.data);
-                dispatch(fetchLoggedInUser());
+                dispatch(fetchMe());
             })
             .catch((err) => {
-                dispatch(authFail(err));
+                dispatch(authActionFail(err));
             });
     };
 };
@@ -129,15 +136,15 @@ export const authCheckState = () => {
         const token = localStorage.getItem(authConstants.TOKEN);
         const refreshToken = localStorage.getItem(authConstants.REFRESH_TOKEN);
         if (!token && !refreshToken) {
-            dispatch(logout());
+            dispatch(logoutAction());
         } else {
             const expirationDate = new Date(
                 localStorage.getItem(authConstants.EXPIRATION_TIME)
             );
             if (expirationDate <= new Date()) {
-                dispatch(logout());
+                dispatch(logoutAction());
             } else {
-                dispatch(authSuccess(token));
+                dispatch(authActionSuccess(token));
                 dispatch(
                     checkAuthTimeout(
                         (expirationDate.getTime() - new Date().getTime()) / 1000

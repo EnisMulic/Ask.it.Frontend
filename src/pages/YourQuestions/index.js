@@ -12,7 +12,7 @@ import NewQuestion from "../../components/NewQuestion";
 const YourQuestions = () => {
     const dispatch = useDispatch();
 
-    const userId = useSelector((state) => state.loggedInUser.user.id);
+    const userId = useSelector((state) => state.user.me.id);
 
     const onQuestionsFetch = useCallback(
         (userId, pageNumber, pageSize) =>
@@ -21,7 +21,7 @@ const YourQuestions = () => {
     );
 
     const data = useSelector((state) => state.questions);
-    const auth = useSelector((state) => state.auth);
+    const auth = useSelector((state) => state.user);
 
     const getNext = () => {
         onQuestionsFetch(

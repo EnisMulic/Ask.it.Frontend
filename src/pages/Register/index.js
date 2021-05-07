@@ -5,7 +5,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import Button from "react-bootstrap/Button";
 
-import * as actions from "../../store/actions";
+import * as actions from "../../store/user/auth";
 
 import style from "./Register.module.css";
 
@@ -36,7 +36,7 @@ const Register = () => {
         [dispatch]
     );
 
-    const authData = useSelector((state) => state.auth);
+    const authData = useSelector((state) => state.user);
 
     let errorMessage = null;
     if (authData.error) {

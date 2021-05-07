@@ -7,11 +7,11 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import style from "./Navbar.module.css";
 
 import * as routeConsts from "../../constants/routes";
-import * as actions from "../../store/actions";
+import * as actions from "../../store/user/auth";
 import Notifications from "../Notifications";
 
 const Navbar = () => {
-    const auth = useSelector((state) => state.auth);
+    const auth = useSelector((state) => state.user);
     const dispatch = useDispatch();
     const onLogout = useCallback(() => dispatch(actions.forceLogout()), [
         dispatch,

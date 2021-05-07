@@ -12,9 +12,7 @@ import EditAnswer from "../EditAnswer";
 const Answer = (props) => {
     const { ID, Content, Likes, Dislikes, CreatedAt } = props;
 
-    const [editMode, setEditMode] = useState(false);
-
-    const user = useSelector((state) => state.loggedInUser.user);
+    const user = useSelector((state) => state.user.me);
     const dispatch = useDispatch();
 
     const onLikeAnswer = useCallback(
