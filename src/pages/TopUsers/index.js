@@ -1,11 +1,10 @@
 import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "react-loader-spinner";
-import Button from "react-bootstrap/Button";
 
-import * as actions from "../../store/actions";
+import * as actions from "../../store/users/topUsers";
 import * as queryConstants from "../../constants/query";
-import UserListItem from "../../components/UserListItem";
+import UserList from "../../components/UserList";
 
 import style from "./TopUsers.module.css";
 
@@ -18,7 +17,7 @@ const TopUsers = () => {
         [dispatch]
     );
 
-    const data = useSelector((state) => state.topUsers);
+    const data = useSelector((state) => state.users);
 
     const getNext = () => {
         onUsersFetch(
@@ -49,19 +48,7 @@ const TopUsers = () => {
 
     return (
         <div className={style.TopUsers}>
-            {data.users.map((user) => {
-                return (
-                    <UserListItem
-                        key={user.id + new Date().getTime()}
-                        {...user}
-                    />
-                );
-            })}
-            {data.nextPage && (
-                <Button variant="dark" onClick={() => getNext()}>
-                    Load more
-                </Button>
-            )}
+            <UserList {...data} getNext={getNext} />
         </div>
     );
 };

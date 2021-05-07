@@ -2,7 +2,7 @@ import { createStore, applyMiddleware, combineReducers, compose } from "redux";
 import thunk from "redux-thunk";
 
 import user from "./user/reducer";
-import topUsersReducer from "./reducers/topUsers";
+import users from "./users/reducer";
 import questions from "./questions/reducer";
 
 import { saveState, loadState } from "./localStorage";
@@ -10,7 +10,7 @@ import { saveState, loadState } from "./localStorage";
 const rootReducer = combineReducers({
     questions,
     user,
-    topUsers: topUsersReducer,
+    users,
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

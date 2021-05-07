@@ -33,9 +33,3 @@ export {
     dislikeAnswerUndoSuccess,
     dislikeAnswerUndoFail,
 } from "./loggedInUser";
-export {
-    fetchTopUsers,
-    fetchTopUsersStart,
-    fetchTopUsersSuccess,
-    fetchTopUsersFail,
-} from "./topUsers";
