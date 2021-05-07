@@ -51,30 +51,8 @@ export {
     dislikeAnswerUndoFail,
 } from "./loggedInUser";
 export {
-    fetchLatestQuestions,
-    fetchLatestQuestionsStart,
-    fetchLatestQuestionsSuccess,
-    fetchLatestQuestionsFail,
-} from "./latestQuestions";
-export {
-    fetchHotQuestions,
-    fetchHotQuestionsStart,
-    fetchHotQuestionsSuccess,
-    fetchHotQuestionsFail,
-} from "./hotQuestions";
-export {
     fetchTopUsers,
     fetchTopUsersStart,
     fetchTopUsersSuccess,
     fetchTopUsersFail,
 } from "./topUsers";
-export {
-    fetchUsersQuestions,
-    fetchUsersQuestionsStart,
-    fetchUsersQuestionsSuccess,
-    fetchUsersQuestionsFail,
-    addQuestion,
-    addQuestionStart,
-    addQuestionSuccess,
-    addQuestionFail,
-} from "./usersQuestions";

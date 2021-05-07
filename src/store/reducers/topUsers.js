@@ -23,7 +23,7 @@ const fetchTopUsersStart = (state, action) => {
 const fetchTopUsersSuccess = (state, action) => {
     var users = [...state.users];
 
-    if (action.payload.PageNumber !== state.pageNumber) {
+    if (action.payload.pageNumber !== state.pageNumber) {
         users = [...users, ...action.payload.data];
     } else {
         users = [...action.payload.Data];

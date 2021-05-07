@@ -1,14 +1,13 @@
 import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "react-loader-spinner";
-import Button from "react-bootstrap/Button";
 
-import * as actions from "../../store/actions";
+import * as actions from "../../store/questions/latestQuestions";
 import * as queryConstants from "../../constants/query";
-import QuestionListItem from "../../components/QuestionListItem";
 
 import style from "./Home.module.css";
 import NewQuestion from "../../components/NewQuestion";
+import QuestionList from "../../components/QuestionList";
 
 const Home = () => {
     const dispatch = useDispatch();
@@ -19,7 +18,7 @@ const Home = () => {
         [dispatch]
     );
 
-    const data = useSelector((state) => state.latestQuestions);
+    const data = useSelector((state) => state.questions);
     const auth = useSelector((state) => state.auth);
 
     const getNext = () => {
@@ -50,22 +49,10 @@ const Home = () => {
     }
 
     return (
-        <div className={style.Home}>
-            {auth.token && <NewQuestion />}
-            {data.questions.map((question) => {
-                return (
-                    <QuestionListItem
-                        key={question.id + new Date().getTime()}
-                        {...question}
-                    />
-                );
-            })}
-            {data.nextPage && (
-                <Button variant="dark" onClick={() => getNext()}>
-                    Load more
-                </Button>
-            )}
-        </div>
+        <>
+            <div className={style.Home}>{auth.token && <NewQuestion />}</div>
+            <QuestionList {...data} getNext={getNext} />
+        </>
     );
 };
 

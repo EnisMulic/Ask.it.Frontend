@@ -3,20 +3,16 @@ import thunk from "redux-thunk";
 
 import authReducer from "./reducers/auth";
 import loggedInUserReducer from "./reducers/loggedInUser";
-import latestQuestionsReducer from "./reducers/latestQuestions";
-import hotQuestionsReducer from "./reducers/hotQuestions";
 import topUsersReducer from "./reducers/topUsers";
-import usersQuestionsReducer from "./reducers/usersQuestions";
+import questions from "./questions/reducer";
 
 import { saveState, loadState } from "./localStorage";
 
 const rootReducer = combineReducers({
+    questions,
     auth: authReducer,
     loggedInUser: loggedInUserReducer,
-    latestQuestions: latestQuestionsReducer,
-    hotQuestions: hotQuestionsReducer,
     topUsers: topUsersReducer,
-    usersQuestions: usersQuestionsReducer,
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

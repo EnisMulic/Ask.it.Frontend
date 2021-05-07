@@ -14,7 +14,7 @@ import "tinymce/skins/ui/oxide/content.min.css";
 import "tinymce/skins/content/default/content.min.css";
 import { Editor } from "@tinymce/tinymce-react";
 
-import * as actions from "../../store/actions";
+import * as actions from "../../store/questions/addQuestion";
 
 const NewQuestion = () => {
     const [showModal, setShowModal] = useState(false);

@@ -1,11 +1,10 @@
 import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "react-loader-spinner";
-import Button from "react-bootstrap/Button";
 
-import * as actions from "../../store/actions";
+import * as actions from "../../store/questions/usersQuestions";
 import * as queryConstants from "../../constants/query";
-import QuestionListItem from "../../components/QuestionListItem";
+import QuestionList from "../../components/QuestionList";
 
 import style from "./YourQuestions.module.css";
 import NewQuestion from "../../components/NewQuestion";
@@ -21,7 +20,7 @@ const YourQuestions = () => {
         [dispatch]
     );
 
-    const data = useSelector((state) => state.usersQuestions);
+    const data = useSelector((state) => state.questions);
     const auth = useSelector((state) => state.auth);
 
     const getNext = () => {
@@ -54,22 +53,12 @@ const YourQuestions = () => {
     }
 
     return (
-        <div className={style.Questions}>
-            {auth.token && <NewQuestion />}
-            {data.questions.map((question) => {
-                return (
-                    <QuestionListItem
-                        key={question.id + new Date().getTime()}
-                        {...question}
-                    />
-                );
-            })}
-            {data.nextPage && (
-                <Button variant="dark" onClick={() => getNext()}>
-                    Load more
-                </Button>
-            )}
-        </div>
+        <>
+            <div className={style.YourQuestions}>
+                {auth.token && <NewQuestion />}
+            </div>
+            <QuestionList {...data} getNext={getNext} />
+        </>
     );
 };
 
