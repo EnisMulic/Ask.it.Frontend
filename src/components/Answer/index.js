@@ -1,78 +1,87 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ThumbsUp, ThumbsDown, User, Edit } from "react-feather";
+import { ThumbsUp, ThumbsDown, User } from "react-feather";
 import parse from "html-react-parser";
 
-import * as actions from "../../store/actions";
+import * as actions from "../../store/common/rateAnswer";
 
 import style from "./Answer.module.css";
 import DeleteAnswer from "../DeleteAnswer";
 import EditAnswer from "../EditAnswer";
 
 const Answer = (props) => {
-    const { ID, Content, Likes, Dislikes, CreatedAt } = props;
+    const { id, content, likes, dislikes, createdAt } = props;
 
     const user = useSelector((state) => state.user.me);
     const dispatch = useDispatch();
 
     const onLikeAnswer = useCallback(
-        (answerId) => dispatch(actions.likeAnswer(answerId)),
+        (answerId, isDisliked) =>
+            dispatch(actions.likeAnswerAction(answerId, isDisliked)),
         [dispatch]
     );
     const onLikeAnswerUndo = useCallback(
-        (answerId) => dispatch(actions.likeAnswerUndo(answerId)),
+        (answerId) => dispatch(actions.likeAnswerUndoAction(answerId)),
         [dispatch]
     );
 
     const onDislikeAnswer = useCallback(
-        (answerId) => dispatch(actions.dislikeAnswer(answerId)),
+        (answerId, isLiked) =>
+            dispatch(actions.dislikeAnswerAction(answerId, isLiked)),
         [dispatch]
     );
     const onDislikeAnswerUndo = useCallback(
-        (answerId) => dispatch(actions.dislikeAnswerUndo(answerId)),
+        (answerId) => dispatch(actions.dislikeAnswerUndoAction(answerId)),
         [dispatch]
     );
 
-    var thumbsUp = <ThumbsUp size="21" />;
+    let thumbsUp = <ThumbsUp size="21" />;
+    let thumbsDown = <ThumbsDown size="21" />;
 
     if (user !== null) {
-        if (
-            user.AnswerRatings &&
-            user.AnswerRatings.find(
-                (item) => item.answerId === ID && item.isLiked === true
-            )
-        ) {
+        let isLiked = user.answerRatings.find(
+            (item) => item.answerId === id && item.isLiked === true
+        );
+
+        let isDisliked = user.answerRatings.find(
+            (item) => item.answerId === id && item.isLiked === false
+        );
+
+        if (isLiked) {
             thumbsUp = (
                 <ThumbsUp
                     size="21"
                     fill={"#828282"}
-                    onClick={() => onLikeAnswerUndo(ID)}
+                    onClick={() => onLikeAnswerUndo(id)}
                 />
             );
         } else {
-            thumbsUp = <ThumbsUp size="21" onClick={() => onLikeAnswer(ID)} />;
+            thumbsUp = (
+                <ThumbsUp
+                    size="21"
+                    onClick={() =>
+                        onLikeAnswer(id, !(isDisliked === undefined))
+                    }
+                />
+            );
         }
-    }
 
-    var thumbsDown = <ThumbsDown size="21" />;
-
-    if (user !== null) {
-        if (
-            user.AnswerRatings &&
-            user.AnswerRatings.find(
-                (item) => item.answerId === ID && item.isLiked === false
-            )
-        ) {
+        if (isDisliked) {
             thumbsDown = (
                 <ThumbsDown
                     size="21"
                     fill={"#828282"}
-                    onClick={() => onDislikeAnswerUndo(ID)}
+                    onClick={() => onDislikeAnswerUndo(id)}
                 />
             );
         } else {
             thumbsDown = (
-                <ThumbsDown size="21" onClick={() => onDislikeAnswer(ID)} />
+                <ThumbsDown
+                    size="21"
+                    onClick={() =>
+                        onDislikeAnswer(id, !(isLiked === undefined))
+                    }
+                />
             );
         }
     }
@@ -81,30 +90,30 @@ const Answer = (props) => {
         <div className={style.Answer}>
             <div className={style.Actions}>
                 <div className={style.Spacer} />
-                {user && user.ID === props.User.ID ? (
+                {user && user.id === props.user.id ? (
                     <>
                         <EditAnswer {...props} />
-                        <DeleteAnswer id={ID} />
+                        <DeleteAnswer id={id} />
                     </>
                 ) : null}
             </div>
             <div className={style.Wrapper}>
-                <div className={style.Content}>{parse(Content)}</div>
+                <div className={style.content}>{parse(content)}</div>
             </div>
             <div className={style.Info}>
                 <User className={style.Icon} />
-                <span className={style.Text}>{props.User.Email}</span>
+                <span className={style.Text}>{props.user.email}</span>
                 <div className={style.Spacer}></div>
-                <div>{new Date(CreatedAt).toLocaleDateString("en-GB")}</div>
+                <div>{new Date(createdAt).toLocaleDateString("en-GB")}</div>
             </div>
             <div className={style.Data}>
                 <div className={style.DataWrapper}>
                     {thumbsUp}
-                    <span className={style.Number}>{Likes}</span>
+                    <span className={style.Number}>{likes}</span>
                 </div>
                 <div className={style.DataWrapper}>
                     {thumbsDown}
-                    <span className={style.Number}>{Dislikes}</span>
+                    <span className={style.Number}>{dislikes}</span>
                 </div>
             </div>
         </div>

@@ -1,32 +1,31 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Loader from "react-loader-spinner";
 
-import http from "../../http";
-import * as endpointConstants from "../../constants/endpoints";
+import * as actions from "../../store/questions/question";
+
 import QuestionListItem from "../../components/QuestionListItem";
 import Answer from "../../components/Answer";
-
 import CreateAnswer from "../../components/CreateAnswer";
 
 import style from "./QuestionDetails.module.css";
 
 const QuestionDetails = (props) => {
     const { id } = useParams();
-    const [question, setQuestion] = useState();
+
+    const dispatch = useDispatch();
+
+    const onQuestionFetch = useCallback(
+        (id) => dispatch(actions.fetchQuestionAction(id)),
+        [dispatch]
+    );
+
+    const question = useSelector((state) => state.questions.question);
 
     useEffect(() => {
-        http.get(
-            endpointConstants.GET_QUESTION_BY_ID_ENDPOINT.replace("{id}", id)
-        )
-            .then((response) => {
-                setQuestion(response.data.data);
-            })
-            .catch((err) => console.log(err));
-        return () => {
-            setQuestion({});
-        };
-    }, [id]);
+        onQuestionFetch(id);
+    }, [onQuestionFetch, id]);
 
     return (
         <div>

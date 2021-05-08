@@ -4,9 +4,13 @@ import * as user from "./usersQuestions";
 import * as add from "./addQuestion";
 import * as rateQuestionActions from "../common/rateQuestion";
 import * as rateQuestion from "./rateQuestion/reducer";
+import * as rateAnswerActions from "../common/rateAnswer";
+import * as rateAnswer from "./rateAnswer/reducer";
+import * as question from "./question";
 
 const initialState = {
     questions: [],
+    question: null,
     type: null,
     error: null,
     loading: false,
@@ -60,6 +64,28 @@ const reducer = (state = initialState, action) => {
             return rateQuestion.dislikeQuestionUndoSuccess(state, action);
         case rateQuestionActions.DISLIKE_QUESTION_UNDO_FAIL:
             return rateQuestion.dislikeQuestionUndoFail(state, action);
+        case rateAnswerActions.LIKE_ANSWER_SUCCESS:
+            return rateAnswer.likeAnswerSuccess(state, action);
+        case rateAnswerActions.LIKE_ANSWER_FAIL:
+            return rateAnswer.likeAnswerFail(state, action);
+        case rateAnswerActions.LIKE_ANSWER_UNDO_SUCCESS:
+            return rateAnswer.likeAnswerUndoSuccess(state, action);
+        case rateAnswerActions.LIKE_ANSWER_UNDO_FAIL:
+            return rateAnswer.likeAnswerUndoFail(state, action);
+        case rateAnswerActions.DISLIKE_ANSWER_SUCCESS:
+            return rateAnswer.dislikeAnswerSuccess(state, action);
+        case rateAnswerActions.DISLIKE_ANSWER_FAIL:
+            return rateAnswer.dislikeAnswerFail(state, action);
+        case rateAnswerActions.DISLIKE_ANSWER_UNDO_SUCCESS:
+            return rateAnswer.dislikeAnswerUndoSuccess(state, action);
+        case rateAnswerActions.DISLIKE_ANSWER_UNDO_FAIL:
+            return rateAnswer.dislikeAnswerUndoFail(state, action);
+        case question.FETCH_QUESTION_START:
+            return question.fetchQuestionStart(state, action);
+        case question.FETCH_QUESTION_SUCCESS:
+            return question.fetchQuestionSuccess(state, action);
+        case question.FETCH_QUESTION_FAIL:
+            return question.fetchQuestionFail(state, action);
         default:
             return state;
     }

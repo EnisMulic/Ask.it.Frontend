@@ -4,6 +4,8 @@ import * as pw from "./changePassword";
 import * as update from "./update";
 import * as rateQuestionActions from "../common/rateQuestion";
 import * as rateQuestion from "./rateQuestion/reducer";
+import * as rateAnswerActions from "../common/rateAnswer";
+import * as rateAnswer from "./rateAnswer/reducer";
 
 const initialState = {
     me: null,
@@ -62,6 +64,22 @@ const reducer = (state = initialState, action) => {
             return rateQuestion.dislikeQuestionUndoSuccess(state, action);
         case rateQuestionActions.DISLIKE_QUESTION_UNDO_FAIL:
             return rateQuestion.dislikeQuestionUndoFail(state, action);
+        case rateAnswerActions.LIKE_ANSWER_SUCCESS:
+            return rateAnswer.likeAnswerSuccess(state, action);
+        case rateAnswerActions.LIKE_ANSWER_FAIL:
+            return rateAnswer.likeAnswerFail(state, action);
+        case rateAnswerActions.LIKE_ANSWER_UNDO_SUCCESS:
+            return rateAnswer.likeAnswerUndoSuccess(state, action);
+        case rateAnswerActions.LIKE_ANSWER_UNDO_FAIL:
+            return rateAnswer.likeAnswerUndoFail(state, action);
+        case rateAnswerActions.DISLIKE_ANSWER_SUCCESS:
+            return rateAnswer.dislikeAnswerSuccess(state, action);
+        case rateAnswerActions.DISLIKE_ANSWER_FAIL:
+            return rateAnswer.dislikeAnswerFail(state, action);
+        case rateAnswerActions.DISLIKE_ANSWER_UNDO_SUCCESS:
+            return rateAnswer.dislikeAnswerUndoSuccess(state, action);
+        case rateAnswerActions.DISLIKE_ANSWER_UNDO_FAIL:
+            return rateAnswer.dislikeAnswerUndoFail(state, action);
         default:
             return state;
     }
