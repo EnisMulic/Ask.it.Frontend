@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect } from "react";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { useDispatch, useSelector } from "react-redux";
-import * as actions from "../../store/actions";
+import * as actions from "../../store/user/notifications";
 import { Bell } from "react-feather";
 import { connect } from "../../websocket";
 
@@ -20,7 +20,7 @@ const Notifications = () => {
     }
 
     const addNotification = useCallback(
-        (notification) => dispatch(actions.addNotification(notification)),
+        (notification) => dispatch(actions.addNotificationAction(notification)),
         [dispatch]
     );
 

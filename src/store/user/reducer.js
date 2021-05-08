@@ -6,6 +6,7 @@ import * as rateQuestionActions from "../common/rateQuestion";
 import * as rateQuestion from "./rateQuestion/reducer";
 import * as rateAnswerActions from "../common/rateAnswer";
 import * as rateAnswer from "./rateAnswer/reducer";
+import * as notification from "./notifications";
 
 const initialState = {
     me: null,
@@ -80,6 +81,8 @@ const reducer = (state = initialState, action) => {
             return rateAnswer.dislikeAnswerUndoSuccess(state, action);
         case rateAnswerActions.DISLIKE_ANSWER_UNDO_FAIL:
             return rateAnswer.dislikeAnswerUndoFail(state, action);
+        case notification.ADD_NOTIFICATION:
+            return notification.addNotification(state, action);
         default:
             return state;
     }
