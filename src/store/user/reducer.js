@@ -2,6 +2,8 @@ import * as auth from "./auth";
 import * as me from "./me";
 import * as pw from "./changePassword";
 import * as update from "./update";
+import * as rateQuestionActions from "../common/rateQuestion";
+import * as rateQuestion from "./rateQuestion/reducer";
 
 const initialState = {
     me: null,
@@ -44,6 +46,22 @@ const reducer = (state = initialState, action) => {
             return update.updateUserSuccess(state, action);
         case update.UPDATE_USER_FAIL:
             return update.updateUserFail(state, action);
+        case rateQuestionActions.LIKE_QUESTION_SUCCESS:
+            return rateQuestion.likeQuestionSuccess(state, action);
+        case rateQuestionActions.LIKE_QUESTION_FAIL:
+            return rateQuestion.likeQuestionFail(state, action);
+        case rateQuestionActions.LIKE_QUESTION_UNDO_SUCCESS:
+            return rateQuestion.likeQuestionUndoSuccess(state, action);
+        case rateQuestionActions.LIKE_QUESTION_UNDO_FAIL:
+            return rateQuestion.likeQuestionUndoFail(state, action);
+        case rateQuestionActions.DISLIKE_QUESTION_SUCCESS:
+            return rateQuestion.dislikeQuestionSuccess(state, action);
+        case rateQuestionActions.DISLIKE_QUESTION_FAIL:
+            return rateQuestion.dislikeQuestionFail(state, action);
+        case rateQuestionActions.DISLIKE_QUESTION_UNDO_SUCCESS:
+            return rateQuestion.dislikeQuestionUndoSuccess(state, action);
+        case rateQuestionActions.DISLIKE_QUESTION_UNDO_FAIL:
+            return rateQuestion.dislikeQuestionUndoFail(state, action);
         default:
             return state;
     }

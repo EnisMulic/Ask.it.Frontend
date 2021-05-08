@@ -2,6 +2,8 @@ import * as latest from "./latestQuestions";
 import * as hot from "./hotQuestions";
 import * as user from "./usersQuestions";
 import * as add from "./addQuestion";
+import * as rateQuestionActions from "../common/rateQuestion";
+import * as rateQuestion from "./rateQuestion/reducer";
 
 const initialState = {
     questions: [],
@@ -42,6 +44,22 @@ const reducer = (state = initialState, action) => {
             return add.addQuestionSuccess(state, action);
         case add.ADD_QUESTION_FAIL:
             return add.addQuestionFail(state, action);
+        case rateQuestionActions.LIKE_QUESTION_SUCCESS:
+            return rateQuestion.likeQuestionSuccess(state, action);
+        case rateQuestionActions.LIKE_QUESTION_FAIL:
+            return rateQuestion.likeQuestionFail(state, action);
+        case rateQuestionActions.LIKE_QUESTION_UNDO_SUCCESS:
+            return rateQuestion.likeQuestionUndoSuccess(state, action);
+        case rateQuestionActions.LIKE_QUESTION_UNDO_FAIL:
+            return rateQuestion.likeQuestionUndoFail(state, action);
+        case rateQuestionActions.DISLIKE_QUESTION_SUCCESS:
+            return rateQuestion.dislikeQuestionSuccess(state, action);
+        case rateQuestionActions.DISLIKE_QUESTION_FAIL:
+            return rateQuestion.dislikeQuestionFail(state, action);
+        case rateQuestionActions.DISLIKE_QUESTION_UNDO_SUCCESS:
+            return rateQuestion.dislikeQuestionUndoSuccess(state, action);
+        case rateQuestionActions.DISLIKE_QUESTION_UNDO_FAIL:
+            return rateQuestion.dislikeQuestionUndoFail(state, action);
         default:
             return state;
     }

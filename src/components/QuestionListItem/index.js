@@ -4,7 +4,7 @@ import { ThumbsUp, ThumbsDown } from "react-feather";
 import { Link } from "react-router-dom";
 import parse from "html-react-parser";
 
-import * as actions from "../../store/actions";
+import * as actions from "../../store/common/rateQuestion";
 
 import style from "./QuestionListItem.module.css";
 
@@ -17,31 +17,38 @@ const QuestionListItem = (props) => {
     const dispatch = useDispatch();
 
     const onLikeQuestion = useCallback(
-        (questionId) => dispatch(actions.likeQuestion(questionId)),
+        (questionId, isDisliked) =>
+            dispatch(actions.likeQuestionAction(questionId, isDisliked)),
         [dispatch]
     );
     const onLikeQuestionUndo = useCallback(
-        (questionId) => dispatch(actions.likeQuestionUndo(questionId)),
+        (questionId) => dispatch(actions.likeQuestionUndoAction(questionId)),
         [dispatch]
     );
 
     const onDislikeQuestion = useCallback(
-        (questionId) => dispatch(actions.dislikeQuestion(questionId)),
+        (questionId, isLiked) =>
+            dispatch(actions.dislikeQuestionAction(questionId, isLiked)),
         [dispatch]
     );
     const onDislikeQuestionUndo = useCallback(
-        (questionId) => dispatch(actions.dislikeQuestionUndo(questionId)),
+        (questionId) => dispatch(actions.dislikeQuestionUndoAction(questionId)),
         [dispatch]
     );
 
-    var thumbsUp = <ThumbsUp size="21" />;
+    let thumbsUp = <ThumbsUp size="21" />;
+    let thumbsDown = <ThumbsDown size="21" />;
 
     if (loggedInUser !== null) {
-        if (
-            loggedInUser.questionRatings.find(
-                (item) => item.questionId === id && item.isLiked === true
-            )
-        ) {
+        let isLiked = loggedInUser.questionRatings.find(
+            (item) => item.questionId === id && item.isLiked === true
+        );
+
+        let isDisliked = loggedInUser.questionRatings.find(
+            (item) => item.questionId === id && item.isLiked === false
+        );
+
+        if (isLiked) {
             thumbsUp = (
                 <ThumbsUp
                     size="21"
@@ -51,19 +58,16 @@ const QuestionListItem = (props) => {
             );
         } else {
             thumbsUp = (
-                <ThumbsUp size="21" onClick={() => onLikeQuestion(id)} />
+                <ThumbsUp
+                    size="21"
+                    onClick={() =>
+                        onLikeQuestion(id, !(isDisliked === undefined))
+                    }
+                />
             );
         }
-    }
 
-    var thumbsDown = <ThumbsDown size="21" />;
-
-    if (loggedInUser !== null) {
-        if (
-            loggedInUser.questionRatings.find(
-                (item) => item.questionId === id && item.isLiked === false
-            )
-        ) {
+        if (isDisliked) {
             thumbsDown = (
                 <ThumbsDown
                     size="21"
@@ -73,7 +77,12 @@ const QuestionListItem = (props) => {
             );
         } else {
             thumbsDown = (
-                <ThumbsDown size="21" onClick={() => onDislikeQuestion(id)} />
+                <ThumbsDown
+                    size="21"
+                    onClick={() =>
+                        onDislikeQuestion(id, !(isLiked === undefined))
+                    }
+                />
             );
         }
     }
