@@ -128,53 +128,6 @@ const dislikeQuestionUndoFail = (state, action) => {
     });
 };
 
-const updateUserStart = (state, action) => {
-    return updateObject(state, {
-        error: null,
-        loading: true,
-    });
-};
-
-const updateUserSuccess = (state, action) => {
-    return updateObject(state, {
-        user: updateObject(state.user, {
-            firstName: action.firstName,
-            lastName: action.lastName,
-            email: action.email,
-        }),
-        error: null,
-        loading: false,
-    });
-};
-
-const updateUserFail = (state, action) => {
-    return updateObject(state, {
-        error: action.error,
-        loading: false,
-    });
-};
-
-const changePasswordStart = (state, action) => {
-    return updateObject(state, {
-        error: null,
-        loading: true,
-    });
-};
-
-const changePasswordSuccess = (state, action) => {
-    return updateObject(state, {
-        error: null,
-        loading: false,
-    });
-};
-
-const changePasswordFail = (state, action) => {
-    return updateObject(state, {
-        error: action.error,
-        loading: false,
-    });
-};
-
 const addNotification = (state, action) => {
     const newNotifications = [
         ...state.user.answerNotifications,
@@ -326,18 +279,6 @@ const reducer = (state = initialState, action) => {
             return dislikeQuestionUndoSuccess(state, action);
         case actionTypes.DISLIKE_QUESTION_UNDO_FAIL:
             return dislikeQuestionUndoFail(state, action);
-        case actionTypes.UPDATE_USER_START:
-            return updateUserStart(state, action);
-        case actionTypes.UPDATE_USER_SUCCESS:
-            return updateUserSuccess(state, action);
-        case actionTypes.UPDATE_USER_FAIL:
-            return updateUserFail(state, action);
-        case actionTypes.CHANGE_PASSWORD_START:
-            return changePasswordStart(state, action);
-        case actionTypes.CHANGE_PASSWORD_SUCCESS:
-            return changePasswordSuccess(state, action);
-        case actionTypes.CHANGE_PASSWORD_FAIL:
-            return changePasswordFail(state, action);
         case actionTypes.ADD_NOTIFICATION:
             return addNotification(state, action);
         case actionTypes.LIKE_ANSWER_SUCCESS:

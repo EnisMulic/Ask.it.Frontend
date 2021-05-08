@@ -4,7 +4,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import Button from "react-bootstrap/Button";
 
-import * as actions from "../../store/actions";
+import * as actions from "../../store/user/update";
 
 import style from "./EditUserInfo.module.css";
 
@@ -21,7 +21,7 @@ const EditUserInfo = () => {
 
     const onUpdateUser = useCallback(
         (firstName, lastName, email) =>
-            dispatch(actions.updateUser(firstName, lastName, email)),
+            dispatch(actions.updateUserAction(firstName, lastName, email)),
         [dispatch]
     );
 

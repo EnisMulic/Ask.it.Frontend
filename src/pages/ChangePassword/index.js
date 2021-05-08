@@ -4,7 +4,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import Button from "react-bootstrap/Button";
 
-import * as actions from "../../store/actions";
+import * as actions from "../../store/user/changePassword";
 
 import style from "./ChangePassword.module.css";
 
@@ -34,7 +34,7 @@ const ChangePassword = () => {
 
     const onChangePassword = useCallback(
         (password, newPassword) =>
-            dispatch(actions.changePassword(password, newPassword)),
+            dispatch(actions.changePasswordAction(password, newPassword)),
         [dispatch]
     );
 
