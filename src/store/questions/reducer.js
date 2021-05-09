@@ -7,6 +7,7 @@ import * as rateQuestion from "./rateQuestion/reducer";
 import * as rateAnswerActions from "../common/rateAnswer";
 import * as rateAnswer from "./rateAnswer/reducer";
 import * as question from "./question";
+import * as deleteQuestion from "./deleteQuestion";
 
 const initialState = {
     questions: [],
@@ -48,6 +49,12 @@ const reducer = (state = initialState, action) => {
             return add.addQuestionSuccess(state, action);
         case add.ADD_QUESTION_FAIL:
             return add.addQuestionFail(state, action);
+        case deleteQuestion.DELETE_QUESTION_START:
+            return deleteQuestion.deleteQuestionStart(state, action);
+        case deleteQuestion.DELETE_QUESTION_SUCCESS:
+            return deleteQuestion.deleteQuestionSuccess(state, action);
+        case deleteQuestion.DELETE_QUESTION_FAIL:
+            return deleteQuestion.deleteQuestionFail(state, action);
         case rateQuestionActions.LIKE_QUESTION_SUCCESS:
             return rateQuestion.likeQuestionSuccess(state, action);
         case rateQuestionActions.LIKE_QUESTION_FAIL:
