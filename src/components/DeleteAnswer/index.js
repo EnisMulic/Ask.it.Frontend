@@ -1,22 +1,19 @@
-import React from "react";
+import React, { useCallback } from "react";
+import { useDispatch } from "react-redux";
 import { Trash2 } from "react-feather";
 
-import http from "../../http";
-import * as endpointConstants from "../../constants/endpoints";
+import * as actions from "../../store/questions/deleteAnswer";
 
 const DeleteAnswer = (props) => {
-    const deleteAnswer = (id) => {
-        console.log("Here");
-        http.delete(
-            endpointConstants.DELETE_ANSWER_ENDPOINT.replace("{id}", id)
-        )
-            .then()
-            .catch((err) => console.log(err));
-    };
+    const dispatch = useDispatch();
+    const onAnswerDelete = useCallback(
+        (answerId) => dispatch(actions.deleteAnswer(answerId)),
+        [dispatch]
+    );
 
     return (
         <div style={{ cursor: "pointer" }}>
-            <Trash2 size="21" onClick={() => deleteAnswer(props.id)} />
+            <Trash2 size="21" onClick={() => onAnswerDelete(props.id)} />
         </div>
     );
 };

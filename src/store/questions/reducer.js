@@ -8,6 +8,9 @@ import * as rateAnswerActions from "../common/rateAnswer";
 import * as rateAnswer from "./rateAnswer/reducer";
 import * as question from "./question";
 import * as deleteQuestion from "./deleteQuestion";
+import * as addAnswer from "./addAnswer";
+import * as editAnswer from "./editAnswer";
+import * as deleteAnswer from "./deleteAnswer";
 
 const initialState = {
     questions: [],
@@ -93,6 +96,24 @@ const reducer = (state = initialState, action) => {
             return question.fetchQuestionSuccess(state, action);
         case question.FETCH_QUESTION_FAIL:
             return question.fetchQuestionFail(state, action);
+        case addAnswer.ADD_ANSWER_START:
+            return addAnswer.addAnswerStart(state, action);
+        case addAnswer.ADD_ANSWER_SUCCESS:
+            return addAnswer.addAnswerSuccess(state, action);
+        case addAnswer.ADD_ANSWER_FAIL:
+            return addAnswer.addAnswerFail(state, action);
+        case editAnswer.EDIT_ANSWER_START:
+            return editAnswer.editAnswerStart(state, action);
+        case editAnswer.EDIT_ANSWER_SUCCESS:
+            return editAnswer.editAnswerSuccess(state, action);
+        case editAnswer.EDIT_ANSWER_FAIL:
+            return editAnswer.editAnswerFail(state, action);
+        case deleteAnswer.DELETE_ANSWER_START:
+            return deleteAnswer.deleteAnswerStart(state, action);
+        case deleteAnswer.DELETE_ANSWER_SUCCESS:
+            return deleteAnswer.deleteAnswerSuccess(state, action);
+        case deleteAnswer.DELETE_ANSWER_FAIL:
+            return deleteAnswer.deleteAnswerFail(state, action);
         default:
             return state;
     }

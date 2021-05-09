@@ -1,4 +1,5 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useCallback } from "react";
+import { useDispatch } from "react-redux";
 import Button from "react-bootstrap/Button";
 
 import "tinymce/tinymce";
@@ -12,25 +13,22 @@ import "tinymce/skins/ui/oxide/content.min.css";
 import "tinymce/skins/content/default/content.min.css";
 import { Editor } from "@tinymce/tinymce-react";
 
-import http from "../../http";
-import * as endpointConstants from "../../constants/endpoints";
+import * as actions from "../../store/questions/addAnswer";
 
 const CreateAnswer = (props) => {
     const { questionId } = props;
     const [showPrompt, setShowPrompt] = useState(false);
 
+    const dispatch = useDispatch();
+    const onAnswerAdd = useCallback(
+        (questionId, answer) => dispatch(actions.addAnswer(questionId, answer)),
+        [dispatch]
+    );
+
     const editorRef = useRef(null);
     const addAnswer = (questionId) => {
         if (editorRef.current) {
-            http.post(
-                endpointConstants.CREATE_QUESTION_ANSWER_ENDPOINT.replace(
-                    "{id}",
-                    questionId
-                ),
-                { content: editorRef.current.getContent() }
-            )
-                .then((response) => console.log(response))
-                .catch((err) => console.log(err));
+            onAnswerAdd(questionId, editorRef.current.getContent());
         }
     };
 
@@ -41,7 +39,7 @@ const CreateAnswer = (props) => {
                 onClick={() => setShowPrompt(!showPrompt)}
                 className="mb-2"
             >
-                {showPrompt == false ? "Answer" : "Cancel"}
+                {showPrompt === false ? "Answer" : "Cancel"}
             </Button>
             {showPrompt && (
                 <>

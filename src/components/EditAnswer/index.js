@@ -1,4 +1,5 @@
-import React, { useRef, useState } from "react";
+import React, { useState, useRef, useCallback } from "react";
+import { useDispatch } from "react-redux";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { Edit } from "react-feather";
@@ -14,27 +15,21 @@ import "tinymce/skins/ui/oxide/content.min.css";
 import "tinymce/skins/content/default/content.min.css";
 import { Editor } from "@tinymce/tinymce-react";
 
-import http from "../../http";
-import * as endpointConstants from "../../constants/endpoints";
+import * as actions from "../../store/questions/editAnswer";
 
 const EditAnswer = (props) => {
     const [showModal, setShowModal] = useState(false);
 
+    const dispatch = useDispatch();
+    const onAnswerEdit = useCallback(
+        (answerId, content) => dispatch(actions.editAnswer(answerId, content)),
+        [dispatch]
+    );
+
     const editorRef = useRef(null);
-    const saveAnswer = () => {
+    const saveAnswer = (answerId) => {
         if (editorRef.current) {
-            // onQuestionAdd(editorRef.current.getContent());
-            var data = {
-                content: editorRef.current.getContent(),
-            };
-            http.put(
-                endpointConstants.UPDATE_ANSWER_ENDPOINT.replace(
-                    "{id}",
-                    props.ID
-                ),
-                data
-            )
-            .catch((err) => console.log(err));
+            onAnswerEdit(answerId, editorRef.current.getContent());
         }
     };
 
@@ -48,7 +43,7 @@ const EditAnswer = (props) => {
                 <Modal.Body>
                     <Editor
                         onInit={(evt, editor) => (editorRef.current = editor)}
-                        initialValue={props.Content}
+                        initialValue={props.content}
                         init={{
                             height: 500,
                             menubar: false,
@@ -77,7 +72,7 @@ const EditAnswer = (props) => {
                     <Button
                         variant="primary"
                         onClick={() => {
-                            saveAnswer();
+                            saveAnswer(props.id);
                             setShowModal(false);
                         }}
                     >
