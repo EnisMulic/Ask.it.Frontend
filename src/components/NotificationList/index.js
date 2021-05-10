@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import NavDropdown from "react-bootstrap/NavDropdown";
@@ -26,13 +26,11 @@ const NotificationList = () => {
         [dispatch]
     );
 
-    useEffect(() => {
-        connect((msg) => {
-            var temp = JSON.parse(msg.data);
-            var data = JSON.parse(temp.body);
-            addNotification(data);
-        });
-    }, [addNotification]);
+    connect((msg) => {
+        var temp = JSON.parse(msg.data);
+        var data = JSON.parse(temp.body);
+        addNotification(data);
+    });
 
     const navDropdownTitle = (
         <span className={style.IconSpan}>

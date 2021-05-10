@@ -13,7 +13,7 @@ const rootReducer = combineReducers({
     users,
 });
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancers = process.env.NODE_ENV === "development" ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose;
 
 const initialState = {
     user: null,
@@ -31,7 +31,7 @@ const store = createStore(
 
 store.subscribe(() => {
     saveState({
-        loggedInUser: store.getState().loggedInUser,
+        user: store.getState().user,
     });
 });
 
