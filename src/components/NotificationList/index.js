@@ -1,15 +1,17 @@
 import React, { useCallback, useEffect } from "react";
-import NavDropdown from "react-bootstrap/NavDropdown";
 import { useDispatch, useSelector } from "react-redux";
-import * as actions from "../../store/user/notifications";
+
+import NavDropdown from "react-bootstrap/NavDropdown";
 import { Bell } from "react-feather";
+
+import * as actions from "../../store/user/addNotification";
 import { connect } from "../../websocket";
 
-import * as routeConstants from "../../constants/routes";
+import NotificationListItem from "../NotificationListItem";
 
-import style from "./Notifications.module.css";
+import style from "./NotificationList.module.css";
 
-const Notifications = () => {
+const NotificationList = () => {
     const dispatch = useDispatch();
 
     const loggedInUser = useSelector((state) => state.user.me);
@@ -30,7 +32,7 @@ const Notifications = () => {
             var data = JSON.parse(temp.body);
             addNotification(data);
         });
-    }, []);
+    }, [addNotification]);
 
     const navDropdownTitle = (
         <span className={style.IconSpan}>
@@ -47,20 +49,14 @@ const Notifications = () => {
         >
             {notifications.map((notification) => {
                 return (
-                    <NavDropdown.Item
-                        href={routeConstants.QUESTION_DETAILS_ROUTE.replace(
-                            ":id",
-                            notification.questionId
-                        )}
+                    <NotificationListItem
+                        {...notification}
                         key={notification.id}
-                        className={style.DropdownItem}
-                    >
-                        {notification.content}
-                    </NavDropdown.Item>
+                    />
                 );
             })}
         </NavDropdown>
     );
 };
 
-export default Notifications;
+export default NotificationList;

@@ -1,0 +1,19 @@
+.Wrapper {
+    display: flex;
+}
+
+a.Item {
+    color: #000;
+    margin: 0.2rem 0.5rem;
+    padding: 0.2rem;
+    white-space: nowrap;
+}
+
+a.Item:hover {
+    cursor: pointer;
+    background: #d3d3d3;
+}
+
+.Icon {
+    margin: 0.2rem;
+}

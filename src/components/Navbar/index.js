@@ -8,7 +8,7 @@ import style from "./Navbar.module.css";
 
 import * as routeConsts from "../../constants/routes";
 import * as actions from "../../store/user/auth";
-import Notifications from "../Notifications";
+import NotificationList from "../NotificationList";
 
 const Navbar = () => {
     const auth = useSelector((state) => state.user);
@@ -55,7 +55,7 @@ const Navbar = () => {
                     </>
                 ) : (
                     <>
-                        <Notifications className={style.Dropdown} />
+                        <NotificationList className={style.Dropdown} />
                         <Nav.Item className="btn">
                             <NavDropdown
                                 title="Profile"

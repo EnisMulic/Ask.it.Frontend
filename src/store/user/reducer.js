@@ -6,7 +6,8 @@ import * as rateQuestionActions from "../common/rateQuestion";
 import * as rateQuestion from "./rateQuestion/reducer";
 import * as rateAnswerActions from "../common/rateAnswer";
 import * as rateAnswer from "./rateAnswer/reducer";
-import * as notification from "./notifications";
+import * as addNotification from "./addNotification";
+import * as removeNotification from "./removeNotification";
 
 const initialState = {
     me: null,
@@ -81,8 +82,14 @@ const reducer = (state = initialState, action) => {
             return rateAnswer.dislikeAnswerUndoSuccess(state, action);
         case rateAnswerActions.DISLIKE_ANSWER_UNDO_FAIL:
             return rateAnswer.dislikeAnswerUndoFail(state, action);
-        case notification.ADD_NOTIFICATION:
-            return notification.addNotification(state, action);
+        case addNotification.ADD_NOTIFICATION:
+            return addNotification.addNotification(state, action);
+        case removeNotification.REMOVE_NOTIFICATION_START:
+            return removeNotification.removeNotificationStart(state, action);
+        case removeNotification.REMOVE_NOTIFICATION_SUCCESS:
+            return removeNotification.removeNotificationSuccess(state, action);
+        case removeNotification.REMOVE_NOTIFICATION_FAIL:
+            return removeNotification.removeNotificationFail(state, action);
         default:
             return state;
     }

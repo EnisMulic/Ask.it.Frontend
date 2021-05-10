@@ -10,6 +10,8 @@ export const fetchQuestionStart = (state, action) => {
 export const fetchQuestionSuccess = (state, action) => {
     return updateObject(state, {
         question: action.question,
+        error: null,
+        loading: false,
     });
 };
 

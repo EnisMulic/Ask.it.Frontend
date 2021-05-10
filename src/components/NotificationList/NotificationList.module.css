@@ -1,12 +1,10 @@
-.Dropdown a {
+.Dropdown{
     text-decoration: none;
     color: #fff;
-    display: flex;
 }
 
-a.DropdownItem {
-    color: black;
-    text-decoration: none;
+.Dropdown a {
+    display: flex;
 }
 
 .IconSpan {

@@ -41,4 +41,6 @@ export const DISLIKE_ANSWER_ENDPOINT = ANSWER_BASE_ENDPOINT + "/{id}/dislike";
 export const DISLIKE_ANSWER_UNDO_ENDPOINT =
     ANSWER_BASE_ENDPOINT + "/{id}/dislike/undo";
 
+export const MARK_NOTIFICATION_AS_READ = API_ROOT + "/answer-notifications/{id}";
+
 export const NOTIFICATIONS_ENDPOINT = "/ws/notifications/{id}";
