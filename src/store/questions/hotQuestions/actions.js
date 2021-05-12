@@ -46,7 +46,7 @@ export const fetchHotQuestions = (pageNumber, pageSize) => {
                 dispatch(fetchHotQuestionsActionSuccess(response.data));
             })
             .catch((err) => {
-                dispatch(fetchHotQuestionsActionFail(err));
+                dispatch(fetchHotQuestionsActionFail(err.response.data));
             });
     };
 };

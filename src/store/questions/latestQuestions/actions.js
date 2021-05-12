@@ -46,7 +46,7 @@ export const fetchLatestQuestions = (pageNumber, pageSize) => {
                 dispatch(fetchLatestQuestionsActionSuccess(response.data));
             })
             .catch((err) => {
-                dispatch(fetchLatestQuestionsActionFail(err));
+                dispatch(fetchLatestQuestionsActionFail(err.response.data));
             });
     };
 };

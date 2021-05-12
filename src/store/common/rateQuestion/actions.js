@@ -37,7 +37,7 @@ export const likeQuestionAction = (questionId, isDisliked) => {
                 dispatch(likeQuestionActionSuccess(questionId, isDisliked));
             })
             .catch((err) => {
-                dispatch(likeQuestionActionFail(err));
+                dispatch(likeQuestionActionFail(err.response.data));
             });
     };
 };
@@ -68,7 +68,7 @@ export const likeQuestionUndoAction = (questionId) => {
                 dispatch(likeQuestionUndoActionSuccess(questionId));
             })
             .catch((err) => {
-                dispatch(likeQuestionUndoActionFail(err));
+                dispatch(likeQuestionUndoActionFail(err.response.data));
             });
     };
 };
@@ -100,7 +100,7 @@ export const dislikeQuestionAction = (questionId, isLiked) => {
                 dispatch(dislikeQuestionActionSuccess(questionId, isLiked));
             })
             .catch((err) => {
-                dispatch(dislikeQuestionActionFail(err));
+                dispatch(dislikeQuestionActionFail(err.response.data));
             });
     };
 };
@@ -131,7 +131,7 @@ export const dislikeQuestionUndoAction = (questionId) => {
                 dispatch(dislikeQuestionUndoActionSuccess(questionId));
             })
             .catch((err) => {
-                dispatch(dislikeQuestionUndoActionFail(err));
+                dispatch(dislikeQuestionUndoActionFail(err.response.data));
             });
     };
 };

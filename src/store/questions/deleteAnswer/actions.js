@@ -36,7 +36,7 @@ export const deleteAnswer = (answerId) => {
                 dispatch(deleteAnswerActionSuccess(answerId));
             })
             .catch((err) => {
-                dispatch(deleteAnswerActionFail(err));
+                dispatch(deleteAnswerActionFail(err.response.data));
             });
     };
 };

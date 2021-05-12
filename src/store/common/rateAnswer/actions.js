@@ -37,7 +37,7 @@ export const likeAnswerAction = (answerId, isDisliked) => {
                 dispatch(likeAnswerActionSuccess(answerId, isDisliked));
             })
             .catch((err) => {
-                dispatch(likeAnswerActionFail(err));
+                dispatch(likeAnswerActionFail(err.response.data));
             });
     };
 };
@@ -68,7 +68,7 @@ export const likeAnswerUndoAction = (answerId) => {
                 dispatch(likeAnswerUndoActionSuccess(answerId));
             })
             .catch((err) => {
-                dispatch(likeAnswerUndoActionFail(err));
+                dispatch(likeAnswerUndoActionFail(err.response.data));
             });
     };
 };
@@ -97,7 +97,7 @@ export const dislikeAnswerAction = (answerId, isLiked) => {
                 dispatch(dislikeAnswerActionSuccess(answerId, isLiked));
             })
             .catch((err) => {
-                dispatch(dislikeAnswerActionFail(err));
+                dispatch(dislikeAnswerActionFail(err.response.data));
             });
     };
 };
@@ -128,7 +128,7 @@ export const dislikeAnswerUndoAction = (answerId) => {
                 dispatch(dislikeAnswerUndoActionSuccess(answerId));
             })
             .catch((err) => {
-                dispatch(dislikeAnswerUndoActionFail(err));
+                dispatch(dislikeAnswerUndoActionFail(err.response.data));
             });
     };
 };

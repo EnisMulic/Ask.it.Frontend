@@ -43,7 +43,7 @@ export const fetchTopUsers = (pageNumber, pageSize) => {
                 dispatch(fetchTopUsersActionSuccess(response.data));
             })
             .catch((err) => {
-                dispatch(fetchTopUsersActionFail(err));
+                dispatch(fetchTopUsersActionFail(err.response.data));
             });
     };
 };

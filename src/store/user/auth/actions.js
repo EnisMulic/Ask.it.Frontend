@@ -107,7 +107,7 @@ export const register = (email, password, firstName, lastName) => {
                 dispatch(fetchMe());
             })
             .catch((err) => {
-                dispatch(authActionFail(err));
+                dispatch(authActionFail(err.response.data));
             });
     };
 };
@@ -126,7 +126,7 @@ export const login = (email, password) => {
                 dispatch(fetchMe());
             })
             .catch((err) => {
-                dispatch(authActionFail(err));
+                dispatch(authActionFail(err.response.data));
             });
     };
 };

@@ -36,7 +36,7 @@ export const fetchQuestionAction = (id) => {
                 dispatch(fetchQuestionActionSuccess(response.data.data));
             })
             .catch((err) => {
-                dispatch(fetchQuestionActionFail(err));
+                dispatch(fetchQuestionActionFail(err.response.data));
             });
     };
 };

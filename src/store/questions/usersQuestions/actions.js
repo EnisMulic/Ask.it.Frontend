@@ -47,7 +47,7 @@ export const fetchUsersQuestions = (id, pageNumber, pageSize) => {
             })
             .catch((err) => {
                 console.log(err);
-                dispatch(fetchUsersQuestionsActionFail(err));
+                dispatch(fetchUsersQuestionsActionFail(err.response.data));
             });
     };
 };

@@ -4,6 +4,7 @@ import { Redirect } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import Button from "react-bootstrap/Button";
+import Alert from "react-bootstrap/Alert";
 
 import * as actions from "../../store/user/auth";
 
@@ -33,11 +34,6 @@ const Login = () => {
 
     const authData = useSelector((state) => state.user);
 
-    let errorMessage = null;
-    if (authData.error) {
-        errorMessage = <p>{authData.error.message}</p>;
-    }
-
     let authRedirect = null;
     if (authData.token) {
         authRedirect = <Redirect to={authData.authRedirectPath} exact />;
@@ -53,7 +49,13 @@ const Login = () => {
     return (
         <div className={style.Login}>
             {authRedirect}
-            {errorMessage}
+            {authData.error !== null && (
+                <Alert variant="danger">
+                    {authData.error.errors.map((error) => {
+                        return <p>{error.message}</p>;
+                    })}
+                </Alert>
+            )}
             <Formik
                 initialValues={{ email: "", password: "" }}
                 validationSchema={loginSchema}

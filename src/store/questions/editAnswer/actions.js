@@ -41,7 +41,7 @@ export const editAnswer = (answerId, content) => {
                 dispatch(editAnswerActionSuccess(response.data.data));
             })
             .catch((err) => {
-                dispatch(editAnswerActionFail(err));
+                dispatch(editAnswerActionFail(err.response.data));
             });
     };
 };

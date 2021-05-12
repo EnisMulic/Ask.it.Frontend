@@ -43,7 +43,7 @@ export const updateUserAction = (firstName, lastName, email) => {
                 dispatch(updateUserActionSuccess(firstName, lastName, email));
             })
             .catch((err) => {
-                dispatch(updateUserActionFail(err));
+                dispatch(updateUserActionFail(err.response.data));
             });
     };
 };

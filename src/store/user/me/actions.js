@@ -41,7 +41,7 @@ export const fetchMe = () => {
                 dispatch(fetchMeActionSuccess(response.data.data));
             })
             .catch((err) => {
-                dispatch(fetchMeActionFail(err));
+                dispatch(fetchMeActionFail(err.response.data));
             });
     };
 };

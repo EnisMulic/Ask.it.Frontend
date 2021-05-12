@@ -38,7 +38,7 @@ export const changePasswordAction = (password, newPassword) => {
                 dispatch(changePasswordActionSuccess());
             })
             .catch((err) => {
-                dispatch(changePasswordActionFail(err));
+                dispatch(changePasswordActionFail(err.response.data));
             });
     };
 };

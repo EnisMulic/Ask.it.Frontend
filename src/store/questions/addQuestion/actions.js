@@ -38,7 +38,7 @@ export const addQuestion = (content) => {
                 dispatch(addQuestionActionSuccess(response.data.data));
             })
             .catch((err) => {
-                dispatch(addQuestionActionFail(err));
+                dispatch(addQuestionActionFail(err.response.data));
             });
     };
 };

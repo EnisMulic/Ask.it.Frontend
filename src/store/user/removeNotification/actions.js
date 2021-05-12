@@ -21,7 +21,7 @@ export const removeNotificationActionSuccess = (notificationId) => {
 export const removeNotificationActionFail = (error) => {
     return {
         type: REMOVE_NOTIFICATION_FAIL,
-        error: error
+        error: error,
     };
 };
 
@@ -29,12 +29,17 @@ export const removeNotification = (notificationId) => {
     return (dispatch) => {
         dispatch(removeNotificationActionStart());
 
-        http.post(endpointConstants.MARK_NOTIFICATION_AS_READ.replace("{id}", notificationId))
+        http.post(
+            endpointConstants.MARK_NOTIFICATION_AS_READ.replace(
+                "{id}",
+                notificationId
+            )
+        )
             .then((response) => {
                 dispatch(removeNotificationActionSuccess(notificationId));
             })
             .catch((err) => {
-                dispatch(removeNotificationActionFail(err));
+                dispatch(removeNotificationActionFail(err.response.data));
             });
     };
-}
+};

@@ -39,7 +39,7 @@ export const deleteQuestion = (questionId) => {
                 dispatch(deleteQuestionActionSuccess(questionId));
             })
             .catch((err) => {
-                dispatch(deleteQuestionActionFail(err));
+                dispatch(deleteQuestionActionFail(err.response.data));
             });
     };
 };
